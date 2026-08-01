@@ -1,0 +1,188 @@
+.wish-sky-page {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    overflow: hidden;
+
+    background: #010208;
+
+    animation:
+        skyAppear
+        1.5s ease both;
+}
+
+.wish-sky-page canvas {
+    position: absolute !important;
+
+    inset: 0;
+
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@keyframes skyAppear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.sky-message {
+    position: absolute;
+
+    z-index: 20;
+
+    top: 50%;
+    left: 50%;
+
+    width: min(650px, 90%);
+
+    transform:
+        translate(-50%, -40%);
+
+    text-align: center;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 2s ease,
+        transform 2s ease;
+}
+
+.sky-message.visible {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%);
+
+    pointer-events: auto;
+}
+
+.sky-symbol {
+    display: block;
+
+    margin-bottom: 15px;
+
+    color: #ffe17b;
+
+    font-size: 35px;
+
+    text-shadow:
+        0 0 10px #ffd45c,
+        0 0 35px rgba(255, 205, 70, 0.6);
+}
+
+.sky-label {
+    display: block;
+
+    margin-bottom: 15px;
+
+    color:
+        rgba(255, 223, 140, 0.55);
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+}
+
+.sky-message h1 {
+    margin: 14px 0 16px;
+
+    font-family: "Be Vietnam Pro", Arial, sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 500;
+    line-height: 1.35;
+
+    letter-spacing: 0;
+    word-spacing: 0;
+
+    color: #fff5d7;
+
+    text-shadow:
+        0 0 14px rgba(255, 225, 150, 0.2),
+        0 0 35px rgba(255, 205, 100, 0.1);
+}
+
+.sky-message p {
+    max-width: 460px;
+
+    margin:
+        22px auto
+        28px;
+
+    color:
+        rgba(255, 255, 255, 0.48);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+.sky-message button {
+    padding:
+        12px
+        23px;
+
+    border:
+        1px solid
+        rgba(255, 220, 130, 0.2);
+
+    border-radius: 100px;
+
+    background:
+        rgba(255, 230, 160, 0.06);
+
+    backdrop-filter:
+        blur(10px);
+
+    color:
+        rgba(255, 239, 195, 0.8);
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.sky-message button:hover {
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255, 230, 160, 0.12);
+
+    box-shadow:
+        0 0 30px
+        rgba(255, 215, 100, 0.08);
+}
+
+@media (max-width: 600px) {
+    .sky-message h1 {
+        font-size: 29px;
+    }
+
+    .sky-message p {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,463 @@
+/* ===========================================
+   GLOBAL
+=========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body,
+#root{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+}
+
+/* ===========================================
+   LOCK SCREEN
+=========================================== */
+
+.lock-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at top,#233c7b,#081225 45%,#01040c 100%);
+
+}
+
+/* =====================
+   STARS
+===================== */
+
+.lock-screen::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background-image:
+
+        radial-gradient(circle,#fff 1px,transparent 1px),
+        radial-gradient(circle,#fff 2px,transparent 2px),
+        radial-gradient(circle,#fff 1.5px,transparent 1.5px);
+
+    background-size:
+
+        120px 120px,
+        170px 170px,
+        80px 80px;
+
+    opacity:.35;
+
+    animation:
+
+        starMove 70s linear infinite;
+
+}
+
+@keyframes starMove{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(150px);
+
+    }
+
+}
+
+/* =====================
+   AURORA
+===================== */
+
+.lock-screen::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-35%;
+
+    pointer-events:none;
+
+    filter:blur(140px);
+
+    background:
+
+        radial-gradient(circle,#44cfff33,transparent 60%),
+
+        radial-gradient(circle,#ff7bc833,transparent 60%),
+
+        radial-gradient(circle,#7effbb22,transparent 65%);
+
+    animation:
+
+        auroraMove 20s ease-in-out infinite;
+
+}
+
+@keyframes auroraMove{
+
+    50%{
+
+        transform:
+
+            rotate(5deg)
+
+            scale(1.2);
+
+    }
+
+}
+
+/* ===========================================
+CARD
+=========================================== */
+
+.lock-card{
+
+    position:relative;
+
+    z-index:10;
+
+    width:520px;
+
+    padding:55px;
+
+    border-radius:35px;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    background:
+
+        rgba(255,255,255,.06);
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:
+
+        blur(25px);
+
+    box-shadow:
+
+        0 25px 80px rgba(0,0,0,.45),
+
+        0 0 70px rgba(255,255,255,.08);
+
+    animation:
+
+        floatCard 6s ease-in-out infinite;
+
+}
+
+@keyframes floatCard{
+
+    50%{
+
+        transform:
+
+            translateY(-10px);
+
+    }
+
+}
+
+.lock-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-2px;
+
+    pointer-events:none;
+
+    border-radius:40px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(255,255,255,.2),
+
+            transparent,
+
+            rgba(255,120,180,.25)
+
+        );
+
+    filter:blur(20px);
+
+    z-index:-1;
+
+}
+
+/* ===========================================
+TEXT
+=========================================== */
+
+.lock-card h2{
+
+    position:relative;
+
+    z-index:5;
+
+    font-size:70px;
+
+    animation:
+
+        pulse 2s infinite;
+
+}
+
+.lock-card h1{
+
+    position:relative;
+
+    z-index:5;
+
+    margin-top:10px;
+
+    color:white;
+
+    font-size:38px;
+
+}
+
+.lock-card p{
+
+    position:relative;
+
+    z-index:5;
+
+    margin:25px 0;
+
+    color:#ddd;
+
+    line-height:1.8;
+
+    font-size:17px;
+
+}
+
+@keyframes pulse{
+
+    50%{
+
+        transform:
+
+            scale(1.15);
+
+    }
+
+}
+
+/* ===========================================
+INPUT
+=========================================== */
+
+.lock-card input{
+
+    position:relative;
+
+    z-index:5;
+
+    width:100%;
+
+    padding:18px 22px;
+
+    border-radius:18px;
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+    background:
+
+        rgba(255,255,255,.08);
+
+    color:white;
+
+    outline:none;
+
+    font-size:18px;
+
+    transition:.35s;
+
+}
+
+.lock-card input::placeholder{
+
+    color:#d7d7d7;
+
+}
+
+.lock-card input:focus{
+
+    transform:scale(1.02);
+
+    border-color:#ffd166;
+
+    box-shadow:
+
+        0 0 25px rgba(255,209,102,.35);
+
+}
+
+/* ===========================================
+BUTTON
+=========================================== */
+
+.lock-card button{
+
+    position:relative;
+
+    z-index:5;
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:white;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #ff6ea9,
+
+            #ff9d72
+
+        );
+
+    transition:.35s;
+
+}
+
+.lock-card button:hover{
+
+    transform:
+
+        translateY(-4px)
+
+        scale(1.03);
+
+    box-shadow:
+
+        0 0 25px #ff7bb8,
+
+        0 0 45px rgba(255,120,180,.45);
+
+}
+
+/* ===========================================
+ERROR
+=========================================== */
+
+.lock-error{
+
+    position:relative;
+
+    z-index:5;
+
+    margin-top:15px;
+
+    color:#ff9d9d;
+
+}
+
+/* ===========================================
+FLOATING HEARTS
+=========================================== */
+
+.lock-heart{
+
+    position:absolute;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    color:#ff9bc6;
+
+    opacity:.35;
+
+    animation:
+
+        heartFloat linear infinite;
+
+}
+
+@keyframes heartFloat{
+
+    from{
+
+        transform:
+
+            translateY(120vh)
+
+            rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+
+            translateY(-150vh)
+
+            rotate(720deg);
+
+    }
+
+}
