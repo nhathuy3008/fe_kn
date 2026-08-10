@@ -14,7 +14,7 @@ import "./Diary.css";
 const API_URL =
     import.meta.env.VITE_API_URL ||
     // "http://localhost:3000/api";
-    "https://be-kn.onrender.com";
+    "https://be-kn.onrender.com/api";
 
 const AUTHOR = {
     huy: {
