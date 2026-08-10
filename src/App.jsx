@@ -5,6 +5,8 @@ import "./App.css";
 import Home from "./components/pages/Home";
 import WishTree from "./components/pages/WishTree";
 import Diary from "./components/pages/Diary";
+import BirthdayPage from "./components/pages/BirthdayPage";
+import BirthdayAdmin from "./components/pages/BirthdayAdmin";
 
 function App() {
     const [page, setPage] = useState("home");
@@ -27,20 +29,22 @@ function App() {
     if (!unlocked) {
         return (
             <div className="lock-screen">
-{Array.from({ length: 35 }).map((_, i) => (
-    <span
-        key={i}
-        className="lock-heart"
-        style={{
-            left: `${Math.random() * 100}%`,
-            animationDuration: `${12 + Math.random() * 12}s`,
-            animationDelay: `${Math.random() * 10}s`,
-            fontSize: `${12 + Math.random() * 18}px`
-        }}
-    >
-        ❤️
-    </span>
-))}
+
+                {Array.from({ length: 35 }).map((_, i) => (
+                    <span
+                        key={i}
+                        className="lock-heart"
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            animationDuration: `${12 + Math.random() * 12}s`,
+                            animationDelay: `${Math.random() * 10}s`,
+                            fontSize: `${12 + Math.random() * 18}px`
+                        }}
+                    >
+                        ❤️
+                    </span>
+                ))}
+
                 <div className="lock-card">
 
                     <h2>🔒</h2>
@@ -49,11 +53,11 @@ function App() {
                         Chào em 💖
                     </h1>
 
-<p>
-    Mật khẩu à ??? Có lẽ em sẽ biết mật khẩu là gì...
-    <br />
-    Vì đó là ngày mà thế giới có thêm một thiên thần. 🌙✨
-</p>
+                    <p>
+                        Mật khẩu à ??? Có lẽ em sẽ biết mật khẩu là gì...
+                        <br />
+                        Vì đó là ngày mà thế giới có thêm một thiên thần. 🌙✨
+                    </p>
 
                     <input
                         type="password"
@@ -76,16 +80,13 @@ function App() {
                         </p>
                     )}
 
-                    <button
-                        onClick={handleUnlock}
-                    >
+                    <button onClick={handleUnlock}>
                         Mở Câu Chuyện ✨
                     </button>
 
                 </div>
 
             </div>
-
         );
     }
 
@@ -100,6 +101,12 @@ function App() {
                 }
                 onDiary={() =>
                     setPage("diary")
+                }
+                onBirthdayVideo={() =>
+                    setPage("birthday")
+                }
+                onAdmin={() =>
+                    setPage("admin")
                 }
             />
         );
@@ -124,6 +131,32 @@ function App() {
     if (page === "diary") {
         return (
             <Diary
+                onBack={() =>
+                    setPage("home")
+                }
+            />
+        );
+    }
+
+    // =========================
+    // CHƯƠNG III
+    // =========================
+    if (page === "birthday") {
+        return (
+            <BirthdayPage
+                onBack={() =>
+                    setPage("home")
+                }
+            />
+        );
+    }
+
+    // =========================
+    // ADMIN VIDEO
+    // =========================
+    if (page === "admin") {
+        return (
+            <BirthdayAdmin
                 onBack={() =>
                     setPage("home")
                 }

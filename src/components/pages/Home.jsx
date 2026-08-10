@@ -1,10 +1,39 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import "./Home.css";
 
 export default function Home({
     onWishTree,
     onDiary,
+    onBirthdayVideo,
+    onAdmin,
 }) {
+    useEffect(() => {
+        const handleAdminShortcut = (e) => {
+            if (
+                e.ctrlKey &&
+                e.shiftKey &&
+                e.key.toLowerCase() === "h"
+            ) {
+                e.preventDefault();
+
+                if (onAdmin) {
+                    onAdmin();
+                }
+            }
+        };
+
+        window.addEventListener(
+            "keydown",
+            handleAdminShortcut
+        );
+
+        return () => {
+            window.removeEventListener(
+                "keydown",
+                handleAdminShortcut
+            );
+        };
+    }, [onAdmin]);
     const stars = useMemo(
         () =>
             Array.from(
@@ -348,7 +377,68 @@ export default function Home({
                     </span>
                 </div>
             </button>
+            {/* =====================
+        CHƯƠNG III
+====================== */}
 
+            <button
+                className="journey-place birthday-place"
+                type="button"
+                onClick={onBirthdayVideo}
+            >
+                <div className="birthday-box">
+
+                    <div className="birthday-glow" />
+
+                    <div className="gift-base" />
+
+                    <div className="gift-top" />
+
+                    <div className="gift-ribbon-v" />
+
+                    <div className="gift-ribbon-h" />
+
+                    <span className="gift-heart">
+                        ❤
+                    </span>
+
+                    <span className="gift-star star1">
+                        ✦
+                    </span>
+
+                    <span className="gift-star star2">
+                        ✦
+                    </span>
+
+                    <span className="gift-star star3">
+                        ✦
+                    </span>
+
+                </div>
+
+                <div className="place-text">
+
+                    <small>
+                        CHƯƠNG III
+                    </small>
+
+                    <h2>
+                        Chiếc Hộp Thời Gian
+                    </h2>
+
+                    <p>
+                        Một món quà...
+                        <br />
+                        chỉ mở vào ngày
+                        14/08 mỗi năm.
+                    </p>
+
+                    <span>
+                        Mở món quà
+                    </span>
+
+                </div>
+            </button>
             {/* =====================
                 GROUND
             ====================== */}
@@ -356,7 +446,6 @@ export default function Home({
             <div className="journey-ground">
                 <div className="ground-glow" />
             </div>
-
             {/* =====================
                 FOOTER
             ====================== */}

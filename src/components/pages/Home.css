@@ -1,12 +1,23 @@
+@charset "UTF-8";
+
 /* =========================================================
    HOME - CHUYỆN CỦA CHÚNG MÌNH
 ========================================================= */
 
+.journey,
+.journey * {
+    box-sizing: border-box;
+}
+
 .journey {
     position: relative;
+
     width: 100%;
     height: 100vh;
+    height: 100dvh;
+
     min-height: 700px;
+
     overflow: hidden;
 
     color: #fff;
@@ -28,7 +39,11 @@
         "Segoe UI",
         Arial,
         sans-serif;
+
+    animation:
+        cameraFloat 10s ease-in-out infinite;
 }
+
 
 /* =========================================================
    SKY
@@ -53,6 +68,7 @@
     pointer-events: none;
 }
 
+
 /* =========================================================
    STARS
 ========================================================= */
@@ -60,6 +76,7 @@
 .journey-stars {
     position: absolute;
     inset: 0;
+
     z-index: 1;
 
     pointer-events: none;
@@ -91,17 +108,23 @@
 }
 
 @keyframes journeyStar {
+
     0%,
     100% {
         opacity: 0.18;
-        transform: scale(0.7);
+
+        transform:
+            scale(0.7);
     }
 
     50% {
         opacity: 0.95;
-        transform: scale(1.5);
+
+        transform:
+            scale(1.5);
     }
 }
+
 
 /* =========================================================
    SHOOTING STARS
@@ -109,6 +132,7 @@
 
 .journey-shooting {
     position: absolute;
+
     z-index: 2;
 
     width: 170px;
@@ -127,7 +151,8 @@
     box-shadow:
         30px 0 10px rgba(255, 255, 255, 0.1);
 
-    transform: rotate(-28deg);
+    transform:
+        rotate(-28deg);
 
     pointer-events: none;
 
@@ -157,6 +182,7 @@
 }
 
 @keyframes journeyShooting {
+
     0%,
     80% {
         opacity: 0;
@@ -183,12 +209,14 @@
     }
 }
 
+
 /* =========================================================
    MOON
 ========================================================= */
 
 .journey-moon {
     position: absolute;
+
     z-index: 1;
 
     width: 155px;
@@ -214,6 +242,10 @@
         0 0 160px rgba(172, 190, 255, 0.12);
 
     pointer-events: none;
+
+    animation:
+        moonSpin 30s linear infinite,
+        moonGlow 6s ease-in-out infinite;
 }
 
 .moon-hole {
@@ -249,19 +281,42 @@
     bottom: 27px;
 }
 
+@keyframes moonGlow {
+
+    50% {
+        box-shadow:
+            0 0 90px rgba(255,255,255,.45),
+            0 0 180px rgba(180,210,255,.25);
+
+        transform:
+            scale(1.05);
+    }
+}
+
+@keyframes moonSpin {
+
+    100% {
+        transform:
+            rotate(360deg);
+    }
+}
+
+
 /* =========================================================
    TITLE
 ========================================================= */
 
 .journey-title {
     position: absolute;
+
     z-index: 10;
 
     width: 100%;
 
     top: 6%;
 
-    padding: 0 20px;
+    padding:
+        0 20px;
 
     text-align: center;
 }
@@ -271,20 +326,23 @@
         rgba(234, 211, 170, 0.48);
 
     font-size: 8px;
+
     font-weight: 500;
 
     letter-spacing: 6px;
 }
 
 .journey-title h1 {
-    margin: 9px 0 10px;
+    margin:
+        9px 0 10px;
 
-    color: #eee8df;
+    color:
+        #eee8df;
 
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
     font-size:
         clamp(37px, 5vw, 62px);
@@ -295,10 +353,14 @@
 
     text-shadow:
         0 10px 40px rgba(0, 0, 0, 0.5);
+
+    animation:
+        titleGlow 3s ease-in-out infinite;
 }
 
 .journey-title h1 em {
-    color: #e0c393;
+    color:
+        #e0c393;
 
     font-weight: 400;
 }
@@ -306,18 +368,38 @@
 .journey-title p {
     margin: 0;
 
-    color:
-        rgba(237, 228, 214, 0.42);
+    color: rgba(237, 228, 214, 0.65);
 
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
     font-size: 12px;
 
+    font-weight: 400;
+
     line-height: 1.8;
+
+    letter-spacing: 0.1px;
+
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+
+    -moz-osx-font-smoothing: grayscale;
 }
+
+@keyframes titleGlow {
+
+    50% {
+        text-shadow:
+            0 0 15px white,
+            0 0 40px #ffd966,
+            0 0 80px #8fdcff;
+    }
+}
+
 
 /* =========================================================
    CHAPTER CLICK AREAS
@@ -325,9 +407,12 @@
 
 .journey-place {
     position: absolute;
+
     z-index: 10;
 
     width: 330px;
+
+    max-width: 90vw;
 
     padding: 0;
 
@@ -355,15 +440,30 @@
     border-radius: 20px;
 }
 
+
+/* =========================================================
+   DESKTOP POSITION
+   I → II → III
+========================================================= */
+
 .wish-place {
-    left: 10%;
-    bottom: 12%;
+    left: 8%;
+    bottom: 10%;
 }
 
 .diary-place {
-    right: 10%;
-    bottom: 15%;
+    left: 50%;
+    bottom: 19%;
+
+    transform:
+        translateX(-50%);
 }
+
+.birthday-place {
+    right: 8%;
+    bottom: 10%;
+}
+
 
 /* =========================================================
    CHAPTER I - TREE
@@ -386,13 +486,20 @@
             1
         );
 
-    transform-origin: bottom center;
+    transform-origin:
+        bottom center;
 }
 
 .wish-place:hover .journey-tree {
     transform:
         translateY(-10px)
         scale(1.06);
+
+    filter:
+        drop-shadow(
+            0 0 30px
+            rgba(120,255,200,.45)
+        );
 }
 
 .tree-glow {
@@ -414,7 +521,8 @@
             transparent 68%
         );
 
-    filter: blur(12px);
+    filter:
+        blur(12px);
 
     transition:
         opacity 0.5s,
@@ -424,13 +532,18 @@
 .wish-place:hover .tree-glow {
     opacity: 1;
 
-    transform: scale(1.15);
+    transform:
+        scale(1.15);
 }
 
-/* TRUNK */
+
+/* =========================================================
+   TRUNK
+========================================================= */
 
 .jt-trunk {
     position: absolute;
+
     z-index: 1;
 
     width: 28px;
@@ -452,9 +565,11 @@
         );
 
     box-shadow:
-        0 0 20px rgba(0, 0, 0, 0.5);
+        0 0 20px
+        rgba(0, 0, 0, 0.5);
 
-    transform: rotate(1deg);
+    transform:
+        rotate(1deg);
 }
 
 .jt-trunk::before {
@@ -468,13 +583,17 @@
     left: -14px;
     top: 10px;
 
-    border-radius: 100% 0;
+    border-radius:
+        100% 0;
 
-    background: #493225;
+    background:
+        #493225;
 
-    transform: rotate(-28deg);
+    transform:
+        rotate(-28deg);
 
-    transform-origin: bottom right;
+    transform-origin:
+        bottom right;
 }
 
 .jt-trunk::after {
@@ -488,19 +607,27 @@
     right: -14px;
     top: 5px;
 
-    border-radius: 0 100%;
+    border-radius:
+        0 100%;
 
-    background: #493225;
+    background:
+        #493225;
 
-    transform: rotate(28deg);
+    transform:
+        rotate(28deg);
 
-    transform-origin: bottom left;
+    transform-origin:
+        bottom left;
 }
 
-/* TREE CROWN */
+
+/* =========================================================
+   TREE CROWN
+========================================================= */
 
 .jt-leaf {
     position: absolute;
+
     z-index: 2;
 
     border-radius:
@@ -517,9 +644,10 @@
 
     box-shadow:
         inset 0 0 25px
-            rgba(127, 219, 176, 0.05),
+        rgba(127, 219, 176, 0.05),
+
         0 8px 25px
-            rgba(0, 0, 0, 0.18);
+        rgba(0, 0, 0, 0.18);
 }
 
 .jt-leaf-1 {
@@ -562,13 +690,18 @@
     top: 9px;
 }
 
-/* WISH STARS */
+
+/* =========================================================
+   WISH STARS
+========================================================= */
 
 .jt-star {
     position: absolute;
+
     z-index: 4;
 
-    color: #ffe19a;
+    color:
+        #ffe19a;
 
     font-style: normal;
 
@@ -576,7 +709,7 @@
         0 0 7px #ffd477,
         0 0 16px #ffd477,
         0 0 28px
-            rgba(255, 212, 119, 0.45);
+        rgba(255, 212, 119, 0.45);
 
     animation:
         jtStar 2.4s ease-in-out infinite;
@@ -595,7 +728,8 @@
 
     font-size: 10px;
 
-    animation-delay: 0.4s;
+    animation-delay:
+        .4s;
 }
 
 .jt-star-3 {
@@ -604,7 +738,8 @@
 
     font-size: 7px;
 
-    animation-delay: 0.8s;
+    animation-delay:
+        .8s;
 }
 
 .jt-star-4 {
@@ -613,7 +748,8 @@
 
     font-size: 9px;
 
-    animation-delay: 1.2s;
+    animation-delay:
+        1.2s;
 }
 
 .jt-star-5 {
@@ -622,46 +758,66 @@
 
     font-size: 7px;
 
-    animation-delay: 1.6s;
+    animation-delay:
+        1.6s;
 }
 
 @keyframes jtStar {
+
     0%,
     100% {
-        opacity: 0.95;
+        opacity: .95;
 
-        transform: scale(1);
+        transform:
+            scale(1);
     }
 
     50% {
-        opacity: 0.25;
+        opacity: .25;
 
-        transform: scale(0.55);
+        transform:
+            scale(.55);
     }
+}
+
+.wish-place:hover .jt-star {
+    animation-duration:
+        .5s;
+
+    transform:
+        scale(1.8);
 }
 
 .jt-heart {
     position: absolute;
+
     z-index: 5;
 
     left: 50%;
     top: -13px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    color: #f4c6b5;
+    color:
+        #f4c6b5;
 
-    font-size: 21px;
+    font-size:
+        21px;
 
     text-shadow:
-        0 0 15px rgba(255, 190, 168, 0.5),
-        0 0 35px rgba(255, 190, 168, 0.2);
+        0 0 15px
+        rgba(255, 190, 168, 0.5),
+
+        0 0 35px
+        rgba(255, 190, 168, 0.2);
 
     animation:
         homeHeartFloat 3s ease-in-out infinite;
 }
 
 @keyframes homeHeartFloat {
+
     0%,
     100% {
         transform:
@@ -676,8 +832,9 @@
     }
 }
 
+
 /* =========================================================
-   CHAPTER II - FLOATING BOOK
+   CHAPTER II - BOOK
 ========================================================= */
 
 .floating-book {
@@ -686,7 +843,8 @@
     width: 240px;
     height: 200px;
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
     display: grid;
 
@@ -700,11 +858,11 @@
         rotateX(20deg);
 
     transition:
-        transform 0.7s
+        transform .7s
         cubic-bezier(
-            0.2,
-            0.8,
-            0.2,
+            .2,
+            .8,
+            .2,
             1
         );
 
@@ -713,6 +871,7 @@
 }
 
 @keyframes bookFloating {
+
     0%,
     100% {
         transform:
@@ -730,17 +889,25 @@
 }
 
 .diary-place:hover .floating-book {
-    animation-play-state: paused;
+    animation-play-state:
+        paused;
 
     transform:
         perspective(700px)
         rotateX(8deg)
         translateY(-14px)
         scale(1.07);
+
+    filter:
+        drop-shadow(
+            0 0 35px
+            rgba(255,220,120,.45)
+        );
 }
 
 .floating-book-glow {
     position: absolute;
+
     z-index: 0;
 
     width: 310px;
@@ -759,26 +926,31 @@
             transparent 67%
         );
 
-    filter: blur(18px);
+    filter:
+        blur(18px);
 
     transition:
-        transform 0.5s,
-        opacity 0.5s;
+        transform .5s,
+        opacity .5s;
 }
 
-.diary-place:hover .floating-book-glow {
-    transform: scale(1.15);
+.diary-place:hover
+.floating-book-glow {
+    transform:
+        scale(1.15);
 
     opacity: 1;
 }
 
 .fb-page {
     position: relative;
+
     z-index: 2;
 
     height: 140px;
 
-    padding: 30px 18px;
+    padding:
+        30px 18px;
 
     overflow: hidden;
 
@@ -797,31 +969,37 @@
 
     box-shadow:
         0 20px 35px
-            rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.35),
+
         inset 0 0 25px
-            rgba(81, 58, 40, 0.12);
+        rgba(81, 58, 40, 0.12);
 }
 
 .fb-left {
     border-radius:
         10px 2px 2px 10px;
 
-    transform: rotateY(5deg);
+    transform:
+        rotateY(5deg);
 
-    transform-origin: right;
+    transform-origin:
+        right;
 }
 
 .fb-right {
     border-radius:
         2px 10px 10px 2px;
 
-    transform: rotateY(-5deg);
+    transform:
+        rotateY(-5deg);
 
-    transform-origin: left;
+    transform-origin:
+        left;
 }
 
 .fb-spine {
     position: relative;
+
     z-index: 4;
 
     height: 145px;
@@ -836,22 +1014,25 @@
 
     box-shadow:
         0 0 8px
-            rgba(0, 0, 0, 0.35);
+        rgba(0, 0, 0, 0.35);
 }
 
 .fb-page > span {
     display: block;
 
-    margin-bottom: 12px;
+    margin-bottom:
+        12px;
 
-    color: #74543f;
+    color:
+        #74543f;
 
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    font-size: 16px;
+    font-size:
+        16px;
 }
 
 .fb-page i {
@@ -859,7 +1040,8 @@
 
     height: 1px;
 
-    margin: 7px 0;
+    margin:
+        7px 0;
 
     background:
         rgba(82, 59, 43, 0.14);
@@ -875,26 +1057,33 @@
         rgba(82, 59, 43, 0.4);
 
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    font-size: 9px;
+    font-size:
+        9px;
 }
 
-/* BOOK MAGIC */
+
+/* =========================================================
+   BOOK MAGIC
+========================================================= */
 
 .magic {
     position: absolute;
+
     z-index: 6;
 
-    color: #e8c890;
+    color:
+        #e8c890;
 
     text-shadow:
         0 0 10px
-            rgba(238, 201, 139, 0.8),
+        rgba(238, 201, 139, 0.8),
+
         0 0 22px
-            rgba(238, 201, 139, 0.3);
+        rgba(238, 201, 139, 0.3);
 
     animation:
         bookMagic 3.5s ease-in-out infinite;
@@ -909,27 +1098,31 @@
     right: 5px;
     top: 35px;
 
-    animation-delay: 0.8s;
+    animation-delay:
+        .8s;
 }
 
 .m3 {
     left: 55px;
     top: 5px;
 
-    animation-delay: 1.6s;
+    animation-delay:
+        1.6s;
 }
 
 .m4 {
     right: 55px;
     top: 0;
 
-    animation-delay: 2.1s;
+    animation-delay:
+        2.1s;
 }
 
 @keyframes bookMagic {
+
     0%,
     100% {
-        opacity: 0.9;
+        opacity: .9;
 
         transform:
             translateY(0)
@@ -937,7 +1130,7 @@
     }
 
     50% {
-        opacity: 0.2;
+        opacity: .2;
 
         transform:
             translateY(-18px)
@@ -945,90 +1138,414 @@
     }
 }
 
+
+/* =========================================================
+   CHAPTER III - GIFT
+========================================================= */
+
+.birthday-box {
+    position: relative;
+
+    width: 200px;
+    height: 210px;
+
+    margin:
+        0 auto;
+
+    transition:
+        transform .7s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+
+    transform-origin:
+        bottom center;
+}
+
+.birthday-place:hover
+.birthday-box {
+    transform:
+        translateY(-10px)
+        scale(1.06);
+
+    filter:
+        drop-shadow(
+            0 0 30px
+            rgba(255,140,170,.45)
+        );
+}
+
+.birthday-glow {
+    position: absolute;
+
+    width: 230px;
+    height: 220px;
+
+    left: -15px;
+    top: -5px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 130, 165, 0.18),
+            rgba(255, 130, 165, 0.05) 40%,
+            transparent 68%
+        );
+
+    filter:
+        blur(12px);
+
+    transition:
+        opacity .5s,
+        transform .5s;
+}
+
+.birthday-place:hover
+.birthday-glow {
+    opacity: 1;
+
+    transform:
+        scale(1.15);
+}
+
+.gift-base {
+    position: absolute;
+
+    z-index: 1;
+
+    width: 140px;
+    height: 108px;
+
+    left: 30px;
+    bottom: 0;
+
+    border-radius:
+        6px 6px 10px 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8a2f4e 0%,
+            #5c1f38 55%,
+            #33101f 100%
+        );
+
+    box-shadow:
+        0 18px 30px
+        rgba(0, 0, 0, 0.4),
+
+        inset 0 0 18px
+        rgba(255, 190, 205, 0.06);
+}
+
+.gift-top {
+    position: absolute;
+
+    z-index: 2;
+
+    width: 160px;
+    height: 34px;
+
+    left: 20px;
+    bottom: 98px;
+
+    border-radius:
+        6px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a8446a,
+            #6a2540
+        );
+
+    box-shadow:
+        0 8px 16px
+        rgba(0, 0, 0, 0.35);
+}
+
+.gift-ribbon-v {
+    position: absolute;
+
+    z-index: 3;
+
+    width: 15px;
+    height: 132px;
+
+    left: 92px;
+    bottom: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #dfae5f,
+            #f8dfa4 50%,
+            #cb9a4c
+        );
+
+    box-shadow:
+        0 0 10px
+        rgba(248, 223, 164, 0.25);
+}
+
+.gift-ribbon-h {
+    position: absolute;
+
+    z-index: 3;
+
+    width: 160px;
+    height: 15px;
+
+    left: 20px;
+    bottom: 95px;
+
+    border-radius:
+        3px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #dfae5f,
+            #f8dfa4 50%,
+            #cb9a4c
+        );
+
+    box-shadow:
+        0 0 10px
+        rgba(248, 223, 164, 0.25);
+}
+
+.gift-ribbon-v::before,
+.gift-ribbon-v::after {
+    content: "";
+
+    position: absolute;
+
+    width: 30px;
+    height: 26px;
+
+    top: -20px;
+
+    border-radius:
+        50% 50% 50% 4px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8dfa4,
+            #cb9a4c
+        );
+
+    box-shadow:
+        0 4px 8px
+        rgba(0, 0, 0, 0.25);
+}
+
+.gift-ribbon-v::before {
+    left: -32px;
+
+    border-radius:
+        50% 50% 4px 50%;
+}
+
+.gift-ribbon-v::after {
+    right: -32px;
+
+    border-radius:
+        50% 50% 50% 4px;
+}
+
+.gift-heart {
+    position: absolute;
+
+    z-index: 5;
+
+    left: 50%;
+    top: -14px;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        #ff8fab;
+
+    font-size:
+        21px;
+
+    text-shadow:
+        0 0 15px
+        rgba(255, 143, 171, 0.55),
+
+        0 0 35px
+        rgba(255, 143, 171, 0.22);
+
+    animation:
+        homeHeartFloat 3s ease-in-out infinite;
+}
+
+.gift-star {
+    position: absolute;
+
+    z-index: 4;
+
+    color:
+        #ffe19a;
+
+    font-style:
+        normal;
+
+    text-shadow:
+        0 0 7px #ffd477,
+        0 0 16px #ffd477,
+        0 0 28px
+        rgba(255, 212, 119, 0.45);
+
+    animation:
+        jtStar 2.4s ease-in-out infinite;
+}
+
+.gift-star.star1 {
+    left: 6px;
+    top: 30px;
+
+    font-size: 9px;
+}
+
+.gift-star.star2 {
+    right: 2px;
+    top: 55px;
+
+    font-size: 11px;
+
+    animation-delay:
+        .5s;
+}
+
+.gift-star.star3 {
+    left: 66px;
+    top: -30px;
+
+    font-size: 8px;
+
+    animation-delay:
+        1s;
+}
+
+
 /* =========================================================
    CHAPTER TEXT
 ========================================================= */
 
 .place-text {
     position: relative;
+
     z-index: 10;
 
-    margin-top: 4px;
+    margin-top:
+        4px;
 
-    text-align: center;
+    text-align:
+        center;
 }
 
 .place-text small {
     color:
         rgba(224, 199, 157, 0.45);
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    letter-spacing: 5px;
+    letter-spacing:
+        5px;
 }
 
-.place-text h2{
+.place-text h2 {
+    margin:
+        7px 0 8px;
 
-    margin:7px 0 8px;
-
-    color:#f6ead8;
+    color:
+        #f6ead8;
 
     font-family:
-        "Cormorant Garamond",
-        serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    font-size:34px;
+    font-size:
+        34px;
 
-    font-weight:700;
+    font-weight:
+        700;
 
-    line-height:1.2;
+    line-height:
+        1.2;
 
-    letter-spacing:.4px;
+    letter-spacing:
+        .4px;
 
-    text-rendering:optimizeLegibility;
+    text-rendering:
+        optimizeLegibility;
 
-    -webkit-font-smoothing:antialiased;
+    -webkit-font-smoothing:
+        antialiased;
 
     text-shadow:
-        0 4px 18px rgba(0,0,0,.45);
-
+        0 4px 18px
+        rgba(0,0,0,.45);
 }
 
-.place-text p{
+.place-text p {
+    margin:
+        0;
 
-    margin:0;
-
-    color:rgba(238,228,214,.78);
+    color:
+        rgba(238,228,214,.78);
 
     font-family:
-        "Playfair Display",
-        serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    font-size:14px;
+    font-size:
+        14px;
 
-    font-weight:400;
+    font-weight:
+        400;
 
-    line-height:1.8;
+    line-height:
+        1.8;
 
-    letter-spacing:.25px;
+    letter-spacing:
+        .25px;
 
-    text-rendering:optimizeLegibility;
+    text-rendering:
+        optimizeLegibility;
 
-    -webkit-font-smoothing:antialiased;
+    -webkit-font-smoothing:
+        antialiased;
 
-    -moz-osx-font-smoothing:grayscale;
+    -moz-osx-font-smoothing:
+        grayscale;
 
     text-shadow:
-        0 2px 8px rgba(0,0,0,.35);
-
+        0 2px 8px
+        rgba(0,0,0,.35);
 }
 
 .place-text > span {
-    display: inline-block;
+    display:
+        inline-block;
 
-    margin-top: 13px;
+    margin-top:
+        13px;
 
-    padding-bottom: 4px;
+    padding-bottom:
+        4px;
 
     color:
         rgba(229, 202, 158, 0.55);
@@ -1038,55 +1555,63 @@
         rgba(229, 202, 158, 0.15);
 
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    font-size: 10px;
+    font-size:
+        10px;
 
     transition:
-        color 0.3s,
-        border-color 0.3s,
-        letter-spacing 0.3s,
-        transform 0.3s;
+        color .3s,
+        border-color .3s,
+        letter-spacing .3s,
+        transform .3s;
 }
 
 .journey-place:hover
-    .place-text > span {
-    color: #efd099;
+.place-text > span {
+    color:
+        #efd099;
 
     border-color:
         rgba(239, 208, 153, 0.55);
 
-    letter-spacing: 1px;
+    letter-spacing:
+        1px;
 
     transform:
         translateY(-1px);
 }
 
+
 /* =========================================================
-   MEMORY PATH
+   MEMORY PATH - DESKTOP
 ========================================================= */
 
 .memory-path {
     position: absolute;
+
     z-index: 4;
 
-    width: 34%;
-    height: 125px;
+    width: 68%;
+    height: 130px;
 
-    left: 33%;
-    bottom: 23%;
+    left: 16%;
+    bottom: 21%;
 
     border-bottom:
         1px dashed
         rgba(228, 207, 173, 0.16);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    transform: rotate(-4deg);
+    transform:
+        rotate(-2deg);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
 
 .path-dot {
@@ -1095,13 +1620,15 @@
     width: 4px;
     height: 4px;
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    background: #d7bd8f;
+    background:
+        #d7bd8f;
 
     box-shadow:
         0 0 10px
-            rgba(225, 195, 143, 0.6);
+        rgba(225, 195, 143, 0.6);
 
     animation:
         pathDotGlow 2.4s
@@ -1109,69 +1636,100 @@
 }
 
 @keyframes pathDotGlow {
-    50% {
-        opacity: 0.25;
 
-        transform: scale(0.6);
+    50% {
+        opacity:
+            .25;
+
+        transform:
+            scale(.6);
     }
 }
 
 .p1 {
-    left: 5%;
-    bottom: -2px;
+    left:
+        5%;
+
+    bottom:
+        -2px;
 }
 
 .p2 {
-    left: 20%;
-    bottom: 12px;
+    left:
+        20%;
 
-    animation-delay: 0.2s;
+    bottom:
+        12px;
+
+    animation-delay:
+        .2s;
 }
 
 .p3 {
-    left: 35%;
-    bottom: 25px;
+    left:
+        35%;
 
-    animation-delay: 0.4s;
+    bottom:
+        25px;
+
+    animation-delay:
+        .4s;
 }
 
 .p4 {
-    left: 50%;
-    bottom: 31px;
+    left:
+        50%;
 
-    animation-delay: 0.6s;
+    bottom:
+        31px;
+
+    animation-delay:
+        .6s;
 }
 
 .p5 {
-    left: 65%;
-    bottom: 26px;
+    left:
+        65%;
 
-    animation-delay: 0.8s;
+    bottom:
+        26px;
+
+    animation-delay:
+        .8s;
 }
 
 .p6 {
-    left: 80%;
-    bottom: 14px;
+    left:
+        80%;
 
-    animation-delay: 1s;
+    bottom:
+        14px;
+
+    animation-delay:
+        1s;
 }
 
 .p7 {
-    right: 3%;
-    bottom: 0;
+    right:
+        3%;
 
-    animation-delay: 1.2s;
+    bottom:
+        0;
+
+    animation-delay:
+        1.2s;
 }
 
 .path-memory {
-    position: absolute;
+    position:
+        absolute;
 
     color:
         rgba(232, 203, 158, 0.45);
 
     text-shadow:
         0 0 12px
-            rgba(232, 203, 158, 0.25);
+        rgba(232, 203, 158, 0.25);
 
     animation:
         pathMemoryFloat 3s
@@ -1179,52 +1737,78 @@
 }
 
 .memory-one {
-    left: 25%;
-    bottom: 38px;
+    left:
+        25%;
 
-    font-size: 10px;
+    bottom:
+        38px;
+
+    font-size:
+        10px;
 }
 
 .memory-two {
-    left: 50%;
-    bottom: 53px;
+    left:
+        50%;
 
-    font-size: 17px;
+    bottom:
+        53px;
 
-    animation-delay: 0.8s;
+    font-size:
+        17px;
+
+    animation-delay:
+        .8s;
 }
 
 .memory-three {
-    right: 20%;
-    bottom: 35px;
+    right:
+        20%;
 
-    font-size: 10px;
+    bottom:
+        35px;
 
-    animation-delay: 1.6s;
+    font-size:
+        10px;
+
+    animation-delay:
+        1.6s;
 }
 
 @keyframes pathMemoryFloat {
+
     50% {
-        opacity: 0.2;
+        opacity:
+            .2;
 
         transform:
             translateY(-7px);
     }
 }
 
+
 /* =========================================================
    GROUND
 ========================================================= */
 
 .journey-ground {
-    position: absolute;
-    z-index: 3;
+    position:
+        absolute;
 
-    height: 18%;
+    z-index:
+        3;
 
-    left: -5%;
-    right: -5%;
-    bottom: -7%;
+    height:
+        18%;
+
+    left:
+        -5%;
+
+    right:
+        -5%;
+
+    bottom:
+        -7%;
 
     border-radius:
         50% 50% 0 0;
@@ -1239,19 +1823,27 @@
 
     box-shadow:
         0 -20px 70px
-            rgba(25, 67, 52, 0.12);
+        rgba(25, 67, 52, 0.12);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
 
 .ground-glow {
-    position: absolute;
+    position:
+        absolute;
 
-    width: 45%;
-    height: 80px;
+    width:
+        45%;
 
-    left: 5%;
-    top: -20px;
+    height:
+        80px;
+
+    left:
+        5%;
+
+    top:
+        -20px;
 
     background:
         radial-gradient(
@@ -1261,38 +1853,53 @@
         );
 }
 
+
 /* =========================================================
    ENDING
 ========================================================= */
 
 .journey-ending {
     position: absolute;
+
     z-index: 10;
 
     left: 50%;
+
     bottom: 2.5%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     display: flex;
+
     align-items: center;
 
     gap: 12px;
 
-    color:
-        rgba(226, 207, 178, 0.25);
+    color: rgba(226, 207, 178, 0.45);
 
+    /* Font hỗ trợ tiếng Việt tốt */
     font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
     font-size: 9px;
 
+    font-weight: 400;
+
     font-style: italic;
 
+    line-height: 1.6;
+
+    letter-spacing: 0.2px;
+
     white-space: nowrap;
+
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .journey-ending span {
@@ -1305,953 +1912,1847 @@
 }
 
 @keyframes endingHeart {
-    50% {
-        opacity: 0.4;
 
-        transform: scale(1.15);
+    50% {
+        opacity:
+            .4;
+
+        transform:
+            scale(1.15);
     }
 }
 
+
 /* =========================================================
-   RESPONSIVE - TABLET
+   NEBULA
 ========================================================= */
 
-@media (max-width: 1000px) {
-    .wish-place {
-        left: 4%;
+.nebula {
+    position:
+        absolute;
+
+    width:
+        900px;
+
+    height:
+        900px;
+
+    border-radius:
+        50%;
+
+    filter:
+        blur(140px);
+
+    mix-blend-mode:
+        screen;
+
+    pointer-events:
+        none;
+
+    animation:
+        nebulaMove 25s
+        ease-in-out infinite;
+}
+
+.nebula1 {
+    left:
+        -300px;
+
+    top:
+        -250px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(76,130,255,.25),
+            transparent 70%
+        );
+}
+
+.nebula2 {
+    right:
+        -250px;
+
+    bottom:
+        -200px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,120,210,.18),
+            transparent 70%
+        );
+
+    animation-delay:
+        8s;
+}
+
+@keyframes nebulaMove {
+
+    50% {
+        transform:
+            translateY(-40px)
+            scale(1.15);
+    }
+}
+
+
+/* =========================================================
+   FOG
+========================================================= */
+
+.fog {
+    position:
+        absolute;
+
+    left:
+        -40%;
+
+    width:
+        180%;
+
+    height:
+        220px;
+
+    filter:
+        blur(90px);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.05),
+            transparent
+        );
+
+    pointer-events:
+        none;
+
+    animation:
+        fogMove 40s
+        linear infinite;
+}
+
+.fog1 {
+    bottom:
+        12%;
+}
+
+.fog2 {
+    bottom:
+        24%;
+
+    animation-duration:
+        55s;
+
+    opacity:
+        .6;
+}
+
+@keyframes fogMove {
+
+    from {
+        transform:
+            translateX(-25%);
     }
 
-    .diary-place {
-        right: 4%;
+    to {
+        transform:
+            translateX(25%);
+    }
+}
+
+
+/* =========================================================
+   FIREFLIES
+========================================================= */
+
+.fireflies {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    z-index:
+        5;
+}
+
+.firefly {
+    position:
+        absolute;
+
+    width:
+        5px;
+
+    height:
+        5px;
+
+    border-radius:
+        50%;
+
+    background:
+        #ffe87c;
+
+    box-shadow:
+        0 0 12px #ffe87c,
+        0 0 25px #fff3b8;
+
+    animation:
+        fireflyMove 8s
+        ease-in-out infinite,
+
+        fireflyBlink 2s
+        ease-in-out infinite;
+}
+
+@keyframes fireflyMove {
+
+    25% {
+        transform:
+            translate(30px,-25px);
+    }
+
+    50% {
+        transform:
+            translate(-25px,-45px);
+    }
+
+    75% {
+        transform:
+            translate(35px,20px);
+    }
+}
+
+@keyframes fireflyBlink {
+
+    50% {
+        opacity:
+            .2;
+    }
+}
+
+
+/* =========================================================
+   HEART RAIN
+========================================================= */
+
+.heart-rain {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    overflow:
+        hidden;
+
+    z-index:
+        4;
+}
+
+.heart-drop {
+    position:
+        absolute;
+
+    top:
+        -80px;
+
+    font-size:
+        18px;
+
+    color:
+        #ff9ac5;
+
+    opacity:
+        0;
+
+    text-shadow:
+        0 0 12px #ff8dbd,
+        0 0 30px #ff8dbd;
+
+    animation:
+        heartRain
+        linear infinite;
+}
+
+@keyframes heartRain {
+
+    0% {
+        opacity:
+            0;
+
+        transform:
+            translateY(-60px)
+            rotate(0deg)
+            scale(.6);
+    }
+
+    15% {
+        opacity:
+            .75;
+    }
+
+    100% {
+        opacity:
+            0;
+
+        transform:
+            translateY(120vh)
+            rotate(360deg)
+            scale(1.2);
+    }
+}
+
+
+/* =========================================================
+   MAGIC DUST
+========================================================= */
+
+.magic-dust {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    overflow:
+        hidden;
+}
+
+.magic-dust span {
+    position:
+        absolute;
+
+    left:
+        var(--x);
+
+    top:
+        var(--y);
+
+    width:
+        var(--size);
+
+    height:
+        var(--size);
+
+    border-radius:
+        50%;
+
+    background:
+        white;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 20px #ffd966,
+        0 0 35px #fff;
+
+    animation:
+        dustFloat 12s
+        ease-in-out infinite,
+
+        dustBlink 2s
+        ease-in-out infinite;
+
+    animation-delay:
+        var(--delay);
+}
+
+@keyframes dustFloat {
+
+    25% {
+        transform:
+            translate(30px,-25px);
+    }
+
+    50% {
+        transform:
+            translate(-40px,-60px);
+    }
+
+    75% {
+        transform:
+            translate(35px,20px);
+    }
+}
+
+@keyframes dustBlink {
+
+    50% {
+        opacity:
+            .15;
+    }
+}
+
+
+/* =========================================================
+   COMETS
+========================================================= */
+
+.comets {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+}
+
+.comet {
+    position:
+        absolute;
+
+    top:
+        -120px;
+
+    left:
+        -200px;
+
+    width:
+        350px;
+
+    height:
+        3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            white,
+            #9ddcff,
+            transparent
+        );
+
+    transform:
+        rotate(35deg);
+
+    filter:
+        blur(1px);
+
+    animation:
+        cometFly 12s
+        linear infinite;
+
+    animation-delay:
+        var(--delay);
+}
+
+@keyframes cometFly {
+
+    0% {
+        opacity:
+            0;
+
+        transform:
+            translate(-300px,-300px)
+            rotate(35deg);
+    }
+
+    10% {
+        opacity:
+            1;
+    }
+
+    100% {
+        opacity:
+            0;
+
+        transform:
+            translate(2200px,1200px)
+            rotate(35deg);
+    }
+}
+
+
+/* =========================================================
+   LEAF RAIN
+========================================================= */
+
+.leaf-rain span {
+    position:
+        absolute;
+
+    top:
+        -50px;
+
+    left:
+        calc(100% * var(--i));
+
+    font-size:
+        18px;
+
+    animation:
+        leafFall 20s
+        linear infinite;
+}
+
+@keyframes leafFall {
+
+    100% {
+        transform:
+            translateY(120vh)
+            rotate(720deg);
+    }
+}
+
+
+/* =========================================================
+   FIREWORK
+========================================================= */
+
+.fw {
+    position:
+        absolute;
+
+    width:
+        8px;
+
+    height:
+        8px;
+
+    border-radius:
+        50%;
+
+    background:
+        white;
+
+    animation:
+        fw 18s infinite;
+}
+
+@keyframes fw {
+
+    30% {
+        box-shadow:
+            0 0 0 40px transparent,
+            0 0 0 70px rgba(255,120,180,.5),
+            0 0 0 100px rgba(255,255,255,.2);
+    }
+}
+
+
+/* =========================================================
+   LIGHT SWEEP
+========================================================= */
+
+.journey::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        -50%;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,.08),
+            transparent
+        );
+
+    animation:
+        lightSweep 12s
+        linear infinite;
+
+    pointer-events:
+        none;
+}
+
+@keyframes lightSweep {
+
+    100% {
+        transform:
+            translateX(180%);
+    }
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+========================================================= */
+
+.journey::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0,180,255,.15),
+            transparent
+        ),
+
+        radial-gradient(
+            circle at 80% 40%,
+            rgba(255,120,220,.12),
+            transparent
+        ),
+
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(255,255,255,.05),
+            transparent
+        );
+
+    mix-blend-mode:
+        screen;
+
+    animation:
+        bgMove 18s
+        ease-in-out infinite;
+
+    pointer-events:
+        none;
+}
+
+@keyframes bgMove {
+
+    50% {
+        transform:
+            scale(1.08)
+            rotate(3deg);
+    }
+}
+
+
+/* =========================================================
+   SECRET ADMIN
+========================================================= */
+
+.secret-admin {
+    position:
+        fixed;
+
+    right:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        40px;
+
+    height:
+        40px;
+
+    z-index:
+        99999;
+
+    opacity:
+        0;
+
+    cursor:
+        default;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1600px) {
+
+    .wish-place {
+        left:
+            15%;
+    }
+
+    .birthday-place {
+        right:
+            15%;
     }
 
     .memory-path {
-        width: 30%;
+        width:
+            58%;
 
-        left: 35%;
+        left:
+            21%;
     }
 }
 
+
 /* =========================================================
-   RESPONSIVE - MOBILE
+   TABLET
 ========================================================= */
 
-@media (max-width: 800px) {
-    .journey {
-        height: auto;
-        min-height: 1250px;
+@media (min-width: 801px)
+and (max-width: 1000px) {
 
-        overflow-x: hidden;
-        overflow-y: auto;
+    .wish-place {
+        left:
+            3%;
     }
 
+    .birthday-place {
+        right:
+            3%;
+    }
+
+    .memory-path {
+        width:
+            78%;
+
+        left:
+            11%;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   I → II → III
+========================================================= */
+
+@media (max-width: 800px),
+(max-height: 620px) and (orientation: landscape) {
+
+    .journey {
+
+        width:
+            100%;
+
+        height:
+            auto;
+
+        min-height:
+            1420px;
+
+        overflow-x:
+            hidden;
+
+        overflow-y:
+            auto;
+
+        animation:
+            none !important;
+
+        transform:
+            none !important;
+
+        -webkit-overflow-scrolling:
+            touch;
+    }
+
+
+    /* =====================================
+       TITLE
+    ===================================== */
+
     .journey-title {
-        top: 50px;
+
+        position:
+            absolute;
+
+        top:
+            35px;
+
+        left:
+            0;
+
+        width:
+            100%;
+
+        padding:
+            0 15px;
+
+        z-index:
+            20;
+    }
+
+    .journey-title > span {
+
+        font-size:
+            7px;
+
+        letter-spacing:
+            4px;
     }
 
     .journey-title h1 {
-        font-size: 42px;
+
+        margin:
+            8px 0 10px;
+
+        font-size:
+            32px;
+
+        line-height:
+            1.15;
     }
 
     .journey-title p {
-        font-size: 11px;
+
+        font-size:
+            10px;
+
+        line-height:
+            1.7;
     }
+
+
+    /* =====================================
+       MOON
+    ===================================== */
 
     .journey-moon {
-        width: 110px;
-        height: 110px;
 
-        right: -25px;
-        top: 25px;
+        width:
+            90px;
+
+        height:
+            90px;
+
+        right:
+            -25px;
+
+        top:
+            20px;
+
+        opacity:
+            .18;
     }
 
-    /* TREE */
+
+    /* =====================================
+       CHAPTER I
+       CÂY ĐIỀU ƯỚC
+    ===================================== */
 
     .wish-place {
-        width: 300px;
 
-        left: 50%;
-        top: 270px;
-        bottom: auto;
+        position:
+            absolute;
+
+        width:
+            300px;
+
+        max-width:
+            calc(100vw - 30px);
+
+        left:
+            50%;
+
+        right:
+            auto;
+
+        top:
+            250px;
+
+        bottom:
+            auto;
+
+        transform:
+            translateX(-50%);
+
+        z-index:
+            15;
+    }
+
+    .wish-place:hover {
 
         transform:
             translateX(-50%);
     }
 
     .journey-tree {
-        width: 200px;
+
+        width:
+            200px;
+
+        height:
+            230px;
 
         transform:
-            scale(0.9);
+            scale(.82);
     }
 
     .wish-place:hover
-        .journey-tree {
+    .journey-tree {
+
         transform:
-            scale(0.94)
-            translateY(-6px);
+            scale(.86)
+            translateY(-5px);
     }
 
-    /* PATH */
+    .wish-place .place-text {
 
-    .memory-path {
-        width: 1px;
-        height: 170px;
+        margin-top:
+            -5px;
 
-        left: 50%;
-        top: 600px;
-        bottom: auto;
+        width:
+            100%;
 
-        border-bottom: none;
-
-        border-left:
-            1px dashed
-            rgba(228, 207, 173, 0.18);
-
-        border-radius: 0;
-
-        transform: none;
+        padding:
+            0 5px;
     }
 
-    .path-dot {
-        display: none;
+    .wish-place .place-text small {
+
+        display:
+            block;
+
+        font-size:
+            7px;
+
+        letter-spacing:
+            4px;
     }
 
-    .path-memory {
-        left: 50%;
+    .wish-place .place-text h2 {
+
+        font-size:
+            25px;
+
+        line-height:
+            1.25;
+
+        margin:
+            5px 0 8px;
+    }
+
+    .wish-place .place-text p {
+
+        max-width:
+            270px;
+
+        margin:
+            0 auto;
+
+        font-size:
+            10px;
+
+        line-height:
+            1.7;
+    }
+
+    .wish-place .place-text > span {
+
+        margin-top:
+            8px;
+
+        font-size:
+            9px;
+    }
+
+
+    /* =====================================
+       CHAPTER II
+       NHẬT KÝ
+    ===================================== */
+
+    .diary-place {
+
+        position:
+            absolute;
+
+        width:
+            300px;
+
+        max-width:
+            calc(100vw - 30px);
+
+        left:
+            50%;
+
+        right:
+            auto;
+
+        top:
+            660px;
+
+        bottom:
+            auto;
 
         transform:
             translateX(-50%);
+
+        z-index:
+            15;
     }
 
-    .memory-one {
-        top: 15px;
-        bottom: auto;
-    }
-
-    .memory-two {
-        top: 75px;
-        bottom: auto;
-    }
-
-    .memory-three {
-        top: 135px;
-        right: auto;
-        bottom: auto;
-    }
-
-    /* BOOK */
-
-    .diary-place {
-        width: 300px;
-
-        left: 50%;
-        right: auto;
-
-        top: 790px;
-        bottom: auto;
+    .diary-place:hover {
 
         transform:
             translateX(-50%);
     }
 
     .floating-book {
+
+        width:
+            240px;
+
+        height:
+            200px;
+
         transform:
             perspective(700px)
             rotateX(20deg)
-            scale(0.9);
+            scale(.82);
+
+        animation:
+            bookFloating 4s
+            ease-in-out infinite;
     }
 
-    /* GROUND */
+    .diary-place:hover
+    .floating-book {
+
+        transform:
+            perspective(700px)
+            rotateX(8deg)
+            translateY(-8px)
+            scale(.86);
+    }
+
+    .diary-place .place-text {
+
+        margin-top:
+            -5px;
+
+        width:
+            100%;
+    }
+
+    .diary-place .place-text small {
+
+        display:
+            block;
+
+        font-size:
+            7px;
+
+        letter-spacing:
+            4px;
+    }
+
+    .diary-place .place-text h2 {
+
+        font-size:
+            25px;
+
+        line-height:
+            1.25;
+
+        margin:
+            5px 0 8px;
+    }
+
+    .diary-place .place-text p {
+
+        max-width:
+            270px;
+
+        margin:
+            0 auto;
+
+        font-size:
+            10px;
+
+        line-height:
+            1.7;
+    }
+
+    .diary-place .place-text > span {
+
+        margin-top:
+            8px;
+
+        font-size:
+            9px;
+    }
+
+
+    /* =====================================
+       CHAPTER III
+       HỘP THỜI GIAN
+    ===================================== */
+
+    .birthday-place {
+
+        position:
+            absolute;
+
+        width:
+            300px;
+
+        max-width:
+            calc(100vw - 30px);
+
+        left:
+            50%;
+
+        right:
+            auto;
+
+        top:
+            1080px;
+
+        bottom:
+            auto;
+
+        transform:
+            translateX(-50%);
+
+        z-index:
+            15;
+    }
+
+    .birthday-place:hover {
+
+        transform:
+            translateX(-50%);
+    }
+
+    .birthday-box {
+
+        width:
+            200px;
+
+        height:
+            210px;
+
+        transform:
+            scale(.82);
+    }
+
+    .birthday-place:hover
+    .birthday-box {
+
+        transform:
+            scale(.86)
+            translateY(-5px);
+    }
+
+    .birthday-glow {
+
+        width:
+            220px;
+
+        height:
+            210px;
+
+        left:
+            -10px;
+
+        top:
+            -5px;
+    }
+
+    .birthday-place .place-text {
+
+        margin-top:
+            -5px;
+
+        width:
+            100%;
+
+        padding:
+            0 5px;
+    }
+
+    .birthday-place .place-text small {
+
+        display:
+            block;
+
+        font-size:
+            7px;
+
+        letter-spacing:
+            4px;
+    }
+
+    .birthday-place .place-text h2 {
+
+        font-size:
+            25px;
+
+        line-height:
+            1.25;
+
+        margin:
+            5px 0 8px;
+    }
+
+    .birthday-place .place-text p {
+
+        max-width:
+            270px;
+
+        margin:
+            0 auto;
+
+        font-size:
+            10px;
+
+        line-height:
+            1.7;
+    }
+
+    .birthday-place .place-text > span {
+
+        margin-top:
+            8px;
+
+        font-size:
+            9px;
+    }
+
+
+    /* =====================================
+       PATH
+       Nối I → II → III
+    ===================================== */
+
+    .memory-path {
+
+        position:
+            absolute;
+
+        width:
+            1px;
+
+        height:
+            830px;
+
+        left:
+            50%;
+
+        top:
+            420px;
+
+        bottom:
+            auto;
+
+        border:
+            none;
+
+        border-left:
+            1px dashed
+            rgba(228,207,173,.18);
+
+        border-radius:
+            0;
+
+        transform:
+            none;
+
+        z-index:
+            4;
+    }
+
+    .path-dot {
+
+        display:
+            none;
+    }
+
+    .path-memory {
+
+        left:
+            50%;
+
+        transform:
+            translateX(-50%);
+    }
+
+    .memory-one {
+
+        top:
+            60px;
+
+        bottom:
+            auto;
+
+        font-size:
+            9px;
+    }
+
+    .memory-two {
+
+        top:
+            400px;
+
+        bottom:
+            auto;
+
+        font-size:
+            14px;
+    }
+
+    .memory-three {
+
+        top:
+            740px;
+
+        right:
+            auto;
+
+        bottom:
+            auto;
+
+        font-size:
+            9px;
+    }
+
+
+    /* =====================================
+       GROUND
+    ===================================== */
 
     .journey-ground {
-        height: 100px;
 
-        bottom: 0;
+        height:
+            90px;
+
+        bottom:
+            0;
     }
 
+
+    /* =====================================
+       ENDING
+    ===================================== */
+
     .journey-ending {
-        bottom: 30px;
+
+        bottom:
+            max(
+                25px,
+                calc(
+                    env(safe-area-inset-bottom, 0px)
+                    + 10px
+                )
+            );
+
+        font-size:
+            8px;
+    }
+
+
+    /* =====================================
+       GIẢM HIỆU ỨNG NẶNG
+    ===================================== */
+
+    .nebula,
+    .fog,
+    .comets,
+    .leaf-rain {
+
+        display:
+            none;
+    }
+
+    .magic-dust span:nth-child(n + 90) {
+
+        display:
+            none;
+    }
+
+    .fireflies span:nth-child(n + 18) {
+
+        display:
+            none;
+    }
+
+    .heart-rain span:nth-child(n + 12) {
+
+        display:
+            none;
     }
 }
 
+
 /* =========================================================
-   SMALL MOBILE
+   MOBILE 480px
 ========================================================= */
 
 @media (max-width: 480px) {
+
     .journey {
-        min-height: 1200px;
+
+        min-height:
+            1370px;
     }
+
+
+    /* TITLE */
 
     .journey-title {
+
+        top:
+            30px;
+
         padding:
-            0 15px;
-    }
-
-    .journey-title > span {
-        font-size: 7px;
-
-        letter-spacing: 4px;
+            0 12px;
     }
 
     .journey-title h1 {
-        font-size: 36px;
+
+        font-size:
+            29px;
     }
 
-    .journey-place {
+    .journey-title p {
+
+        font-size:
+            10px;
+    }
+
+
+    /* =========================
+       I
+    ========================= */
+
+    .wish-place {
+
+        top:
+            235px;
+
         width:
-            calc(100% - 30px);
+            calc(100% - 20px);
     }
 
-    .place-text h2 {
-        font-size: 24px;
+    .journey-tree {
+
+        transform:
+            scale(.72);
     }
 
-    .place-text p {
-        font-size: 10px;
+    .wish-place:hover
+    .journey-tree {
+
+        transform:
+            scale(.76)
+            translateY(-5px);
     }
 
-    .journey-ending {
-        font-size: 8px;
+    .wish-place .place-text {
+
+        margin-top:
+            -25px;
+    }
+
+    .wish-place .place-text h2 {
+
+        font-size:
+            23px;
+    }
+
+
+    /* =========================
+       II
+    ========================= */
+
+    .diary-place {
+
+        top:
+            640px;
+
+        width:
+            calc(100% - 20px);
+    }
+
+    .floating-book {
+
+        transform:
+            perspective(700px)
+            rotateX(20deg)
+            scale(.72);
+    }
+
+    .diary-place:hover
+    .floating-book {
+
+        transform:
+            perspective(700px)
+            rotateX(8deg)
+            translateY(-8px)
+            scale(.76);
+    }
+
+    .diary-place .place-text {
+
+        margin-top:
+            -20px;
+    }
+
+    .diary-place .place-text h2 {
+
+        font-size:
+            23px;
+    }
+
+
+    /* =========================
+       III
+    ========================= */
+
+    .birthday-place {
+
+        top:
+            1040px;
+
+        width:
+            calc(100% - 20px);
+    }
+
+    .birthday-box {
+
+        transform:
+            scale(.72);
+    }
+
+    .birthday-place:hover
+    .birthday-box {
+
+        transform:
+            scale(.76)
+            translateY(-5px);
+    }
+
+    .birthday-place .place-text {
+
+        margin-top:
+            -25px;
+    }
+
+    .birthday-place .place-text h2 {
+
+        font-size:
+            23px;
+    }
+
+    .birthday-place .place-text p {
+
+        font-size:
+            10px;
+
+        max-width:
+            250px;
+    }
+
+
+    /* PATH */
+
+    .memory-path {
+
+        top:
+            400px;
+
+        height:
+            700px;
+    }
+
+    .memory-one {
+
+        top:
+            80px;
+    }
+
+    .memory-two {
+
+        top:
+            380px;
+    }
+
+    .memory-three {
+
+        top:
+            680px;
     }
 }
+
+
+/* =========================================================
+   VERY SMALL PHONE
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .journey {
+
+        min-height:
+            1300px;
+    }
+
+
+    .journey-title {
+
+        top:
+            25px;
+    }
+
+    .journey-title h1 {
+
+        font-size:
+            26px;
+    }
+
+
+    /* =========================
+       CHAPTER I
+    ========================= */
+
+    .wish-place {
+
+        top:
+            220px;
+    }
+
+    .journey-tree {
+
+        transform:
+            scale(.64);
+    }
+
+    .wish-place:hover
+    .journey-tree {
+
+        transform:
+            scale(.68)
+            translateY(-5px);
+    }
+
+    .wish-place .place-text {
+
+        margin-top:
+            -45px;
+    }
+
+    .wish-place .place-text h2 {
+
+        font-size:
+            21px;
+    }
+
+    .wish-place .place-text p {
+
+        font-size:
+            9px;
+    }
+
+
+    /* =========================
+       CHAPTER II
+    ========================= */
+
+    .diary-place {
+
+        top:
+            600px;
+    }
+
+    .floating-book {
+
+        transform:
+            perspective(700px)
+            rotateX(20deg)
+            scale(.64);
+    }
+
+    .diary-place:hover
+    .floating-book {
+
+        transform:
+            perspective(700px)
+            rotateX(8deg)
+            translateY(-8px)
+            scale(.68);
+    }
+
+    .diary-place .place-text {
+
+        margin-top:
+            -45px;
+    }
+
+    .diary-place .place-text h2 {
+
+        font-size:
+            21px;
+    }
+
+    .diary-place .place-text p {
+
+        font-size:
+            9px;
+    }
+
+
+    /* =========================
+       CHAPTER III
+    ========================= */
+
+    .birthday-place {
+
+        top:
+            980px;
+    }
+
+    .birthday-box {
+
+        transform:
+            scale(.64);
+    }
+
+    .birthday-place:hover
+    .birthday-box {
+
+        transform:
+            scale(.68)
+            translateY(-5px);
+    }
+
+    .birthday-place .place-text {
+
+        margin-top:
+            -45px;
+    }
+
+    .birthday-place .place-text h2 {
+
+        font-size:
+            21px;
+    }
+
+    .birthday-place .place-text p {
+
+        font-size:
+            9px;
+
+        max-width:
+            235px;
+    }
+
+
+    /* PATH */
+
+    .memory-path {
+
+        top:
+            370px;
+
+        height:
+            650px;
+    }
+
+    .memory-one {
+
+        top:
+            70px;
+    }
+
+    .memory-two {
+
+        top:
+            360px;
+    }
+
+    .memory-three {
+
+        top:
+            620px;
+    }
+}
+
+
+/* =========================================================
+   TOUCH DEVICE
+========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+    .place-text > span {
+
+        color:
+            #efd099;
+
+        border-color:
+            rgba(239,208,153,.4);
+    }
+
+    .journey-place:hover
+    .journey-tree {
+
+        filter:
+            none;
+    }
+}
+
 
 /* =========================================================
    REDUCED MOTION
 ========================================================= */
 
-@media (
-    prefers-reduced-motion:
-    reduce
-) {
+@media (prefers-reduced-motion: reduce) {
+
+    .journey,
     .journey *,
     .journey *::before,
     .journey *::after {
+
         animation-duration:
-            0.01ms !important;
+            .01ms !important;
 
         animation-iteration-count:
             1 !important;
 
         transition-duration:
-            0.01ms !important;
+            .01ms !important;
     }
 }
-/*==============================
-NEBULA
-==============================*/
 
-.nebula{
 
-position:absolute;
-
-width:900px;
-height:900px;
-
-border-radius:50%;
-
-filter:blur(140px);
-
-mix-blend-mode:screen;
-
-pointer-events:none;
-
-animation:nebulaMove 25s ease-in-out infinite;
-
-}
-
-.nebula1{
-
-left:-300px;
-
-top:-250px;
-
-background:
-
-radial-gradient(circle,
-rgba(76,130,255,.25),
-transparent 70%);
-
-}
-
-.nebula2{
-
-right:-250px;
-
-bottom:-200px;
-
-background:
-
-radial-gradient(circle,
-rgba(255,120,210,.18),
-transparent 70%);
-
-animation-delay:8s;
-
-}
-
-@keyframes nebulaMove{
-
-50%{
-
-transform:
-translateY(-40px)
-scale(1.15);
-
-}
-
-}
-/*==============================
-FOG
-==============================*/
-
-.fog{
-
-position:absolute;
-
-left:-40%;
-
-width:180%;
-
-height:220px;
-
-filter:blur(90px);
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.05),
-transparent
-);
-
-pointer-events:none;
-
-animation:fogMove 40s linear infinite;
-
-}
-
-.fog1{
-
-bottom:12%;
-
-}
-
-.fog2{
-
-bottom:24%;
-
-animation-duration:55s;
-
-opacity:.6;
-
-}
-
-@keyframes fogMove{
-
-from{
-
-transform:translateX(-25%);
-
-}
-
-to{
-
-transform:translateX(25%);
-
-}
-
-}
-/*==============================
-FIREFLIES
-==============================*/
-
-.fireflies{
-
-position:absolute;
-
-inset:0;
-
-pointer-events:none;
-
-z-index:5;
-
-}
-
-.firefly{
-
-position:absolute;
-
-width:5px;
-
-height:5px;
-
-border-radius:50%;
-
-background:#ffe87c;
-
-box-shadow:
-
-0 0 12px #ffe87c,
-
-0 0 25px #fff3b8;
-
-animation:
-
-fireflyMove 8s ease-in-out infinite,
-
-fireflyBlink 2s ease-in-out infinite;
-
-}
-
-@keyframes fireflyMove{
-
-25%{
-
-transform:
-
-translate(30px,-25px);
-
-}
-
-50%{
-
-transform:
-
-translate(-25px,-45px);
-
-}
-
-75%{
-
-transform:
-
-translate(35px,20px);
-
-}
-
-}
-
-@keyframes fireflyBlink{
-
-50%{
-
-opacity:.2;
-
-}
-
-}
-/*==============================
-HEART RAIN
-==============================*/
-
-.heart-rain{
-
-position:absolute;
-
-inset:0;
-
-pointer-events:none;
-
-overflow:hidden;
-
-z-index:4;
-
-}
-
-.heart-drop{
-
-position:absolute;
-
-top:-80px;
-
-font-size:18px;
-
-color:#ff9ac5;
-
-opacity:0;
-
-text-shadow:
-
-0 0 12px #ff8dbd,
-
-0 0 30px #ff8dbd;
-
-animation:heartRain linear infinite;
-
-}
-
-@keyframes heartRain{
-
-0%{
-
-opacity:0;
-
-transform:
-
-translateY(-60px)
-
-rotate(0deg)
-
-scale(.6);
-
-}
-
-15%{
-
-opacity:.75;
-
-}
-
-100%{
-
-opacity:0;
-
-transform:
-
-translateY(120vh)
-
-rotate(360deg)
-
-scale(1.2);
-
-}
-
-}
-/*==============================
-CAMERA FLOAT
-==============================*/
-
-.journey{
-
-animation:
-
-cameraFloat 10s ease-in-out infinite;
-
-}
-
-@keyframes cameraFloat{
-
-0%,
-100%{
-
-transform:
-
-translateY(0);
-
-}
-
-50%{
-
-transform:
-
-translateY(-10px);
-
-}
-
-}
-/*==============================
-MOON GLOW
-==============================*/
-
-.journey-moon{
-
-animation:
-
-moonGlow 6s ease-in-out infinite;
-
-}
-
-@keyframes moonGlow{
-
-50%{
-
-box-shadow:
-
-0 0 90px rgba(255,255,255,.45),
-
-0 0 180px rgba(180,210,255,.25);
-
-transform:scale(1.05);
-
-}
-
-}
-/*==============================
-TREE MAGIC
-==============================*/
-
-.wish-place:hover .jt-star{
-
-animation-duration:.5s;
-
-transform:scale(1.8);
-
-}
-
-.wish-place:hover .journey-tree{
-
-filter:
-
-drop-shadow(0 0 30px rgba(120,255,200,.45));
-
-}
-/*==============================
-BOOK MAGIC
-==============================*/
-
-.diary-place:hover .floating-book{
-
-filter:
-
-drop-shadow(0 0 35px rgba(255,220,120,.45));
-
-}
-.magic-dust{
-
-position:absolute;
-
-inset:0;
-
-pointer-events:none;
-
-overflow:hidden;
-
-}
-
-.magic-dust span{
-
-position:absolute;
-
-left:var(--x);
-
-top:var(--y);
-
-width:var(--size);
-
-height:var(--size);
-
-border-radius:50%;
-
-background:white;
-
-box-shadow:
-
-0 0 8px white,
-
-0 0 20px #ffd966,
-
-0 0 35px #fff;
-
-animation:
-
-dustFloat 12s ease-in-out infinite,
-
-dustBlink 2s ease-in-out infinite;
-
-animation-delay:var(--delay);
-
-}
-
-@keyframes dustFloat{
-
-25%{
-
-transform:
-
-translate(30px,-25px);
-
-}
-
-50%{
-
-transform:
-
-translate(-40px,-60px);
-
-}
-
-75%{
-
-transform:
-
-translate(35px,20px);
-
-}
-
-}
-
-@keyframes dustBlink{
-
-50%{
-
-opacity:.15;
-
-}
-
-}
-.comets{
-
-position:absolute;
-
-inset:0;
-
-pointer-events:none;
-
-}
-
-.comet{
-
-position:absolute;
-
-top:-120px;
-
-left:-200px;
-
-width:350px;
-
-height:3px;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-white,
-
-#9ddcff,
-
-transparent
-
-);
-
-transform:rotate(35deg);
-
-filter:blur(1px);
-
-animation:
-
-cometFly 12s linear infinite;
-
-animation-delay:var(--delay);
-
-}
-
-@keyframes cometFly{
-
-0%{
-
-opacity:0;
-
-transform:
-
-translate(-300px,-300px)
-
-rotate(35deg);
-
-}
-
-10%{
-
-opacity:1;
-
-}
-
-100%{
-
-opacity:0;
-
-transform:
-
-translate(2200px,1200px)
-
-rotate(35deg);
-
-}
-
-}
-.leaf-rain span{
-
-position:absolute;
-
-top:-50px;
-
-left:calc(100% * var(--i));
-
-font-size:18px;
-
-animation:
-
-leafFall 20s linear infinite;
-
-}
-
-@keyframes leafFall{
-
-100%{
-
-transform:
-
-translateY(120vh)
-
-rotate(720deg);
-
-}
-
-}
-.fw{
-
-position:absolute;
-
-width:8px;
-
-height:8px;
-
-border-radius:50%;
-
-background:white;
-
-animation:
-
-fw 18s infinite;
-
-}
-
-@keyframes fw{
-
-30%{
-
-box-shadow:
-
-0 0 0 40px transparent,
-
-0 0 0 70px rgba(255,120,180,.5),
-
-0 0 0 100px rgba(255,255,255,.2);
-
-}
-
-}
-.journey::before{
-
-content:"";
-
-position:absolute;
-
-inset:-50%;
-
-background:
-
-linear-gradient(
-
-120deg,
-
-transparent,
-
-rgba(255,255,255,.08),
-
-transparent
-
-);
-
-animation:
-
-lightSweep 12s linear infinite;
-
-}
-
-@keyframes lightSweep{
-
-100%{
-
-transform:
-
-translateX(180%);
-
-}
-
-}
-.journey::after{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-background:
-
-radial-gradient(circle at 20% 20%,rgba(0,180,255,.15),transparent),
-
-radial-gradient(circle at 80% 40%,rgba(255,120,220,.12),transparent),
-
-radial-gradient(circle at 50% 90%,rgba(255,255,255,.05),transparent);
-
-mix-blend-mode:screen;
-
-animation:
-
-bgMove 18s ease-in-out infinite;
-
-}
-
-@keyframes bgMove{
-
-50%{
-
-transform:
-
-scale(1.08)
-
-rotate(3deg);
-
-}
-
-}
-.journey-title h1{
-
-animation:
-
-titleGlow 3s ease-in-out infinite;
-
-}
-
-@keyframes titleGlow{
-
-50%{
-
-text-shadow:
-
-0 0 15px white,
-
-0 0 40px #ffd966,
-
-0 0 80px #8fdcff;
-
-}
-
-}
-.journey-moon{
-
-animation:
-
-moonSpin 30s linear infinite,
-
-moonGlow 6s ease-in-out infinite;
-
-}
-
-@keyframes moonSpin{
-
-100%{
-
-transform:
-
-rotate(360deg);
-
-}
-
+/* =========================================================
+   CAMERA FLOAT
+========================================================= */
+
+@keyframes cameraFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-10px);
+    }
+}
+
+/* =========================================================
+   VIETNAMESE FONT SAFETY
+   ========================================================= */
+
+.journey,
+.journey * {
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

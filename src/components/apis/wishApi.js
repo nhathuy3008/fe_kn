@@ -1,8 +1,8 @@
 // src/apis/wishApi.js
 
 const API_URL =
-    import.meta.env.VITE_API_URL || "https://be-kn.onrender.com/api";
-
+    import.meta.env.VITE_API_URL || //"http://localhost:3000/api";
+"https://be-kn.onrender.com";
 // Tạo điều ước
 export const createWish = async (message) => {
     const response = await fetch(`${API_URL}/wishes`, {

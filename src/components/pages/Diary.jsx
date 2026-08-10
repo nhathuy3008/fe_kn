@@ -13,7 +13,8 @@ import "./Diary.css";
 
 const API_URL =
     import.meta.env.VITE_API_URL ||
-    "https://be-kn.onrender.com/api";
+    // "http://localhost:3000/api";
+    "https://be-kn.onrender.com";
 
 const AUTHOR = {
     huy: {
@@ -735,7 +736,7 @@ function IntroBook({
                             </span>
 
                             <small>
-                                HUY ·
+                                NHẬT HUY ·
                                 KHÁNH
                                 NGỌC
                             </small>

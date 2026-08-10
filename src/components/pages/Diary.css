@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /* =========================================================
    RESET / BASE
 ========================================================= */
@@ -6,14 +8,45 @@
     box-sizing: border-box;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 .diary-page {
     position: relative;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
+    height: 100dvh; /* accounts for mobile browser toolbars */
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     color: #f4ead7;
     background: #08080d;
     font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Respect notches / safe areas on modern phones */
+@supports (padding: max(0px)) {
+    .diary-back {
+        left: max(25px, env(safe-area-inset-left));
+        top: max(25px, env(safe-area-inset-top));
+    }
+
+    .diary-library {
+        padding-left: max(clamp(16px, 4vw, 30px), env(safe-area-inset-left));
+        padding-right: max(clamp(16px, 4vw, 30px), env(safe-area-inset-right));
+        padding-bottom: max(clamp(40px, 6vh, 80px), env(safe-area-inset-bottom));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 /* =========================================================
@@ -380,7 +413,7 @@
 
 .chapter-heading h1 {
     margin: 14px 0 12px;
-    font-family: Merriweather, "Times New Roman", serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: clamp(38px, 6vw, 72px);
     font-weight: 400;
     line-height: 0.95;
@@ -391,7 +424,7 @@
 .chapter-heading p {
     color: rgba(240, 226, 204, 0.55);
     line-height: 1.8;
-    font-family: Merriweather, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 14px;
 }
 
@@ -609,7 +642,7 @@
 
 .book-border strong {
     margin: 10px 0;
-    font-family: Merriweather, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 26px;
     font-weight: 400;
     line-height: 1.15;
@@ -636,7 +669,7 @@
     transform: translateX(-50%);
     width: 150px;
     color: rgba(239, 216, 178, 0.5);
-    font-family: Merriweather, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 11px;
     letter-spacing: 2px;
 }
@@ -647,9 +680,7 @@
 
     color:rgba(241,229,214,.72);
 
-    font-family:
-        "Playfair Display",
-        serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 
     font-size:15px;
 
@@ -717,7 +748,7 @@
 
 .library-header h1 {
     margin: 7px 0 4px;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-weight: 400;
     font-size: clamp(28px, 4vw, 45px);
 }
@@ -725,7 +756,7 @@
 .library-header p {
     margin: 0;
     color: rgba(240, 226, 204, 0.45);
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 12px;
 }
 
@@ -771,7 +802,7 @@
     color: rgba(240, 225, 203, 0.4);
     background: none;
     cursor: pointer;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     transition: 0.25s ease;
     display: flex;
     flex-direction: column;
@@ -813,7 +844,7 @@
     color: rgba(239, 217, 181, 0.75);
     background: rgba(20, 14, 15, 0.35);
     cursor: pointer;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .write-new-page span { color: #d9b779; font-size: 16px; }
@@ -845,7 +876,7 @@
 }
 
 .year-left small { font-size: 12px; letter-spacing: 3px; opacity: 0.7; }
-.year-left h2 { font-size: 48px; margin: 4px 0; font-family: "Cormorant Garamond", Georgia, serif; color: #fff; }
+.year-left h2 { font-size: 48px; margin: 4px 0; font-family: "Segoe UI", Arial, sans-serif; color: #fff; }
 .year-left p { margin-top: 8px; opacity: 0.75; font-size: 14px; }
 
 .year-right {
@@ -1089,7 +1120,7 @@
 }
 
 .page-center strong {
-    font-family: "Cormorant Garamond", Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 26px;
     font-weight: 600;
     color: #f6e6c5;
@@ -1146,7 +1177,7 @@
     border-radius: 30px;
     background: rgba(120, 88, 58, 0.08);
     border: 1px solid rgba(120, 88, 58, 0.18);
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1170,7 +1201,7 @@
 .letter-entry-design h2,
 .diary-entry-design h2 {
     margin: 10px 0 18px;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-weight: 400;
     font-size: clamp(26px, 3.2vw, 38px);
     line-height: 1.15;
@@ -1187,7 +1218,7 @@
     white-space: pre-wrap;
     word-break: break-word;
     overflow-wrap: anywhere;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 16px;
     line-height: 1.95;
     color: rgba(60, 44, 34, 0.85);
@@ -1201,7 +1232,7 @@
     align-items: flex-end;
     text-align: center;
     color: #805d45;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .entry-signature span { font-size: 20px; }
@@ -1320,7 +1351,7 @@
 .memory-polaroid-caption {
     margin-top: 8px;
     text-align: center;
-    font-family: "Cormorant Garamond", cursive, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 12px;
     color: #6a4f36;
 }
@@ -1361,7 +1392,7 @@
     justify-content: center;
     text-align: center;
     padding: 10px;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 11px;
     color: rgba(90, 65, 40, 0.6);
 }
@@ -1401,7 +1432,7 @@
     background: #cbbd9e;
     box-shadow: 0 12px 20px rgba(71, 51, 36, 0.15);
     text-align: center;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .letter-shadow {
@@ -1444,7 +1475,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .year-page-star { font-size: 22px; color: rgba(157, 117, 88, 0.5); }
@@ -1486,7 +1517,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .empty-symbol { color: #9e7b59; font-size: 24px; }
@@ -1501,9 +1532,7 @@
 
     color:rgba(245,223,192,.75);
 
-    font-family:
-        "Playfair Display",
-        serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 
     font-size:18px;
 
@@ -1524,7 +1553,7 @@
     background: transparent;
     color: #72533e;
     cursor: pointer;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -1565,7 +1594,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     color: rgba(238, 217, 185, 0.55);
 }
 
@@ -1593,7 +1622,7 @@
     text-align: center;
     margin-top: 50px;
     color: rgba(240, 226, 204, 0.4);
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .library-ending span { font-size: 16px; }
@@ -1603,9 +1632,7 @@
 
     color:rgba(240,229,214,.82);
 
-    font-family:
-        "Poppins",
-        sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 
     font-size:15px;
 
@@ -1701,7 +1728,7 @@
 .diary-editor h2 {
     margin: 12px 0 25px;
     text-align: center;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 32px;
     font-weight: 400;
     line-height: 1.1;
@@ -1771,7 +1798,7 @@
     outline: none;
     color: #47372c;
     background: transparent;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 20px;
 }
 
@@ -1799,7 +1826,7 @@
     outline: none;
     color: #49392e;
     background: transparent;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 15px;
     line-height: 2;
 }
@@ -1812,9 +1839,7 @@
 }
 textarea{
 
-    font-family:
-        "Poppins",
-        sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 
     font-size:15px;
 
@@ -1842,7 +1867,7 @@ textarea{
     align-items: center;
     gap: 8px;
     color: rgba(67, 49, 38, 0.65);
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 12px;
     cursor: pointer;
 }
@@ -1892,7 +1917,7 @@ textarea{
     color: #f1e1c3;
     background: #5b4132;
     cursor: pointer;
-    font-family: Georgia, serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     box-shadow: 0 8px 20px rgba(66, 43, 30, 0.2);
 }
 
@@ -1902,13 +1927,41 @@ textarea{
 
 /* =========================================================
    RESPONSIVE
+   Breakpoints:
+   >1400px  large desktop / wide monitor
+   1024-1400 small desktop / laptop
+   768-1024  tablet landscape
+   601-768   tablet portrait
+   481-600   large phone
+   361-480   phone
+   <=360     small phone
+   plus a short-viewport / landscape-phone override
 ========================================================= */
 
-@media (max-width: 900px) {
-    .book-stage { width: 96vw; }
-    .editor-row { grid-template-columns: 1fr; }
+/* ---------- Large desktop: give the scene a bit more room ---------- */
+@media (min-width: 1400px) {
+    .book-stage { width: min(1080px, 90vw); height: min(680px, 76vh); }
+    .diary-window { width: 320px; height: 420px; }
 }
 
+/* ---------- Small desktop / laptop ---------- */
+@media (max-width: 1200px) {
+    .diary-window { right: 6vw; }
+    .curtain-left { right: calc(6vw + 200px); }
+    .curtain-right { right: calc(6vw - 90px); }
+}
+
+/* ---------- Tablet landscape ---------- */
+@media (max-width: 1024px) {
+    .book-stage { width: 96vw; }
+    .editor-row { grid-template-columns: 1fr; }
+    .year-right { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------- Tablet portrait / large phones ----------
+   The book keeps BOTH pages, they just stack vertically
+   (left page on top, right page below) instead of sitting
+   side by side, since there's no horizontal room left. */
 @media (max-width: 800px) {
     .diary-window, .curtain { opacity: 0.45; }
     .candle { left: 2vw; transform: scale(0.8); }
@@ -1922,48 +1975,189 @@ textarea{
 
     .open-diary-book {
         position: relative;
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
         height: auto;
         transform: none;
+        filter: none;
     }
 
     .book-page {
-        min-height: 560px;
+        min-height: 420px;
         height: auto;
-        border-radius: 12px;
+        border-radius: 14px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
     }
 
-    .left-page { display: none; }
+    /* both pages now stand alone, so round all corners
+       instead of only the outer edge */
+    .left-page,
+    .right-page {
+        border-radius: 14px;
+    }
+
+    /* fake page-fold shadows that used to come from sitting
+       next to the spine no longer apply */
+    .left-page { box-shadow: inset 0 -14px 20px rgba(70, 48, 31, 0.12); }
+    .right-page { box-shadow: inset 0 14px 20px rgba(70, 48, 31, 0.12); }
+
     .book-spine { display: none; }
 
-    .right-page {
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    /* the flip animation was built for two side-by-side halves;
+       on the stacked layout let each turning page cover its own
+       full-width card instead of half the stage */
+    .page-turn-layer {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .page-turn-layer.next,
+    .page-turn-layer.previous {
+        transform-origin: center;
     }
 
     .diary-editor { padding: 40px 25px; }
+
+    .book-controls { grid-template-columns: 40px 1fr 40px; gap: 10px; }
+    .page-indicator { gap: 10px; }
+    .page-center { min-width: 140px; }
 }
 
+/* ---------- Large phones ---------- */
+@media (max-width: 600px) {
+    .chapter-heading h1 { font-size: clamp(34px, 10vw, 46px); }
+    .chapter-heading p { padding: 0 8px; }
+
+    .library-header h1 { font-size: clamp(24px, 7vw, 32px); }
+
+    .year-card { flex-direction: column; align-items: flex-start; padding: 20px; }
+    .year-right { grid-template-columns: repeat(4, 1fr); width: 100%; gap: 10px; }
+    .stat-box { padding: 10px; }
+    .stat-box strong { font-size: 20px; }
+
+    .diary-window {
+        width: 190px;
+        height: 260px;
+        right: 4vw;
+        top: 4vh;
+    }
+    .curtain { width: 120px; height: 360px; }
+    .curtain-left { right: calc(4vw + 130px); }
+    .curtain-right { right: calc(4vw - 55px); }
+
+    .editor-overlay { padding: 14px; }
+    .diary-editor { padding: 30px 20px; width: 100%; }
+    .diary-editor h2 { font-size: 24px; }
+
+    .unlock-field { flex-wrap: wrap; }
+    .unlock-input { width: 100%; }
+}
+
+/* ---------- Phones ---------- */
 @media (max-width: 500px) {
-    .chapter-heading h1 { font-size: 42px; }
+    .chapter-heading h1 { font-size: 38px; }
 
     .closed-book { width: 175px; height: 235px; }
     .book-pages-side { width: 170px; height: 225px; }
     .book-border strong { font-size: 22px; }
 
     .year-line { display: none; }
-    .year-selector { margin-top: 20px; }
+    .year-selector { margin-top: 20px; gap: 8px; }
+
+    .year-list { justify-content: flex-start; }
+    .year-list button { min-width: 56px; padding: 7px 10px; font-size: 13px; }
 
     .year-card { flex-direction: column; align-items: flex-start; }
     .year-right { grid-template-columns: repeat(2, 1fr); }
 
     .book-page { min-height: 520px; }
 
-    .entry-page, .book-title-page { padding: 32px 24px; }
+    .entry-page, .book-title-page { padding: 28px 20px; }
+
+    .entry-header { flex-wrap: wrap; gap: 8px; }
+    .entry-date { font-size: 13px; padding: 5px 11px; }
 
     .entry-content { font-size: 15px; line-height: 1.85; }
 
     .entry-signature { align-items: flex-end; }
+    .entry-actions { opacity: 1; flex-wrap: wrap; }
+
+    .book-title-page strong { font-size: 46px; }
+
+    .page-center { min-width: 0; }
+    .page-center strong { font-size: 21px; }
+    .page-dots { max-width: 170px; }
+
+    .memory-polaroid { width: 110px; }
+    .envelope { max-width: 180px; }
+}
+
+/* ---------- Small / narrow phones ---------- */
+@media (max-width: 360px) {
+    .diary-window { display: none; } /* decorative window no longer fits without crowding content */
+    .curtain { display: none; }
+    .candle { transform: scale(0.65); left: 1vw; bottom: 12vh; }
+
+    .closed-book { width: 150px; height: 200px; }
+    .book-pages-side { width: 145px; height: 190px; }
+    .book-border strong { font-size: 19px; }
+    .cover-ornament { letter-spacing: 2px; }
+
+    .year-right { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .stat-box strong { font-size: 18px; }
+
+    .entry-page, .book-title-page { padding: 22px 16px; }
+    .entry-page h2, .wish-entry-design h2, .memory-entry-design h2,
+    .letter-entry-design h2, .diary-entry-design h2 { font-size: 24px; }
+
+    .book-title-page strong { font-size: 36px; }
+
+    .diary-editor { padding: 24px 14px; }
+    .editor-row { gap: 8px; }
+    .author-switch { grid-template-columns: 1fr; }
+}
+
+/* ---------- Short / landscape phones (limited vertical space) ---------- */
+@media (max-height: 480px) and (orientation: landscape) {
+    .diary-intro { padding: 20px 20px 40px; min-height: auto; }
+    .intro-book-scene { margin-top: 14px; transform: scale(0.75); }
+    .intro-quote { margin-top: 24px; }
+
+    .diary-library { padding-top: 20px; }
+    .book-stage { margin-top: 16px; min-height: 0; height: auto; }
+    .book-page { min-height: 380px; }
+    .diary-window, .curtain { display: none; }
+
+    .editor-overlay { align-items: flex-start; padding-top: 20px; }
+    .diary-editor textarea { height: 140px; }
+}
+
+/* ---------- Touch devices: enlarge tap targets, drop hover-only affordances ---------- */
+@media (hover: none) and (pointer: coarse) {
     .entry-actions { opacity: 1; }
+
+    .book-controls > button,
+    .page-nav,
+    .year-list button,
+    .dot {
+        min-width: 36px;
+        min-height: 36px;
+    }
+
+    .dot { width: 10px; height: 10px; }
+
+    .write-new-page,
+    .save-page,
+    .empty-page button {
+        padding-top: 13px;
+        padding-bottom: 13px;
+    }
+
+    .closed-book:hover {
+        transform: perspective(800px) rotateX(8deg) rotateY(-8deg);
+    }
 }
 
 /* =========================================================
@@ -2643,4 +2837,16 @@ overflow:hidden;
     transform:translate(1800px,900px) scale(1.05);
 }
 
+}
+
+/* =========================================================
+   VIETNAMESE FONT SAFETY - FULL FILE
+   ========================================================= */
+
+.diary-page,
+.diary-page * {
+    font-family: "Segoe UI", Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
