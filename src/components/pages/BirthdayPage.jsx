@@ -8,6 +8,10 @@ import {
 
 export default function BirthdayPage({ onBack }) {
 
+    // =========================================
+    // STATE
+    // =========================================
+
     const [loading, setLoading] = useState(true);
 
     const [locked, setLocked] = useState(true);
@@ -23,6 +27,7 @@ export default function BirthdayPage({ onBack }) {
 
     const [unlockDate, setUnlockDate] = useState(null);
 
+
     // =========================================
     // LOAD VIDEO
     // =========================================
@@ -32,6 +37,7 @@ export default function BirthdayPage({ onBack }) {
         loadVideo();
 
     }, []);
+
 
     // =========================================
     // LOAD VIDEO TỪ API
@@ -47,9 +53,10 @@ export default function BirthdayPage({ onBack }) {
                 await getCurrentBirthdayVideo();
 
             console.log(
-                "Birthday API:",
+                "🎂 Birthday API:",
                 res.data
             );
+
 
             // =====================================
             // VIDEO ĐANG BỊ KHÓA
@@ -59,10 +66,27 @@ export default function BirthdayPage({ onBack }) {
 
                 setLocked(true);
 
+                // ---------------------------------
+                // QUAN TRỌNG:
+                // Không dùng new Date(unlockAt)
+                // trực tiếp vì BE có thể trả:
+                //
+                // 2026-08-14T00:00:00.000Z
+                //
+                // Z = UTC
+                // Việt Nam = UTC+7
+                //
+                // Nếu parse trực tiếp sẽ thành:
+                // 14/08/2026 07:00
+                //
+                // Trong khi mình cần:
+                // 14/08/2026 00:00
+                // ---------------------------------
+
                 if (res.data.unlockAt) {
 
                     setUnlockDate(
-                        new Date(
+                        parseBirthdayDate(
                             res.data.unlockAt
                         )
                     );
@@ -79,6 +103,7 @@ export default function BirthdayPage({ onBack }) {
 
                 return;
             }
+
 
             // =====================================
             // VIDEO ĐÃ MỞ
@@ -97,7 +122,11 @@ export default function BirthdayPage({ onBack }) {
 
                 setUnlockDate(null);
 
-                // Ghi nhận lượt xem
+
+                // =================================
+                // GHI NHẬN LƯỢT XEM
+                // =================================
+
                 try {
 
                     if (
@@ -122,6 +151,7 @@ export default function BirthdayPage({ onBack }) {
                 return;
             }
 
+
             // =====================================
             // KHÔNG CÓ VIDEO
             // =====================================
@@ -134,12 +164,14 @@ export default function BirthdayPage({ onBack }) {
                 getNextBirthday()
             );
 
+
         } catch (error) {
 
             console.error(
                 "Birthday video error:",
                 error
             );
+
 
             /*
              * Nếu BE trả 404 vì chưa có
@@ -163,18 +195,148 @@ export default function BirthdayPage({ onBack }) {
 
     };
 
+
+    // =========================================
+    // PARSE NGÀY SINH NHẬT
+    // =========================================
+    //
+    // Đây là phần FIX lỗi 20 giờ thay vì 13-14 giờ.
+    //
+    // API có thể trả:
+    //
+    // 2026-08-14
+    //
+    // hoặc:
+    //
+    // 2026-08-14T00:00:00.000Z
+    //
+    // hoặc:
+    //
+    // 2026-08-14T00:00:00.000+00:00
+    //
+    // Nếu dùng:
+    //
+    // new Date("2026-08-14T00:00:00.000Z")
+    //
+    // thì JavaScript sẽ hiểu là UTC.
+    //
+    // Việt Nam UTC+7 => thành 07:00.
+    //
+    // Ta chỉ lấy YYYY-MM-DD rồi tạo
+    // Date theo LOCAL TIME của máy.
+    //
+    // =========================================
+
+    const parseBirthdayDate = (value) => {
+
+        if (!value) {
+
+            return getNextBirthday();
+
+        }
+
+
+        const stringValue =
+            String(value);
+
+
+        // -----------------------------------------
+        // Lấy YYYY-MM-DD
+        // -----------------------------------------
+
+        const match =
+            stringValue.match(
+                /^(\d{4})-(\d{2})-(\d{2})/
+            );
+
+
+        if (match) {
+
+            const year =
+                Number(match[1]);
+
+            const month =
+                Number(match[2]) - 1;
+
+            const day =
+                Number(match[3]);
+
+
+            /*
+             * Date local.
+             *
+             * Máy ở Việt Nam:
+             *
+             * 2026
+             * 7
+             * 14
+             * 0
+             * 0
+             * 0
+             *
+             * = 14/08/2026 00:00
+             */
+
+            return new Date(
+                year,
+                month,
+                day,
+                0,
+                0,
+                0,
+                0
+            );
+
+        }
+
+
+        // -----------------------------------------
+        // FALLBACK
+        // -----------------------------------------
+
+        const parsed =
+            new Date(value);
+
+
+        if (
+            !Number.isNaN(
+                parsed.getTime()
+            )
+        ) {
+
+            return new Date(
+                parsed.getFullYear(),
+                parsed.getMonth(),
+                parsed.getDate(),
+                0,
+                0,
+                0,
+                0
+            );
+
+        }
+
+
+        return getNextBirthday();
+
+    };
+
+
     // =========================================
     // NGÀY SINH NHẬT TIẾP THEO
     // =========================================
 
     const getNextBirthday = () => {
 
-        const now = new Date();
+        const now =
+            new Date();
+
 
         let year =
             now.getFullYear();
 
-        const birthday =
+
+        let birthday =
             new Date(
                 year,
                 7,
@@ -185,23 +347,34 @@ export default function BirthdayPage({ onBack }) {
                 0
             );
 
+
+        /*
+         * Nếu đã qua 00:00 ngày 14/08
+         * thì lấy sinh nhật năm sau.
+         */
+
         if (now >= birthday) {
 
             year += 1;
 
+            birthday =
+                new Date(
+                    year,
+                    7,
+                    14,
+                    0,
+                    0,
+                    0,
+                    0
+                );
+
         }
 
-        return new Date(
-            year,
-            7,
-            14,
-            0,
-            0,
-            0,
-            0
-        );
+
+        return birthday;
 
     };
+
 
     // =========================================
     // COUNTDOWN
@@ -210,23 +383,37 @@ export default function BirthdayPage({ onBack }) {
     useEffect(() => {
 
         if (!locked) {
+
             return;
+
         }
+
 
         const target =
             unlockDate ||
             getNextBirthday();
 
+
         setUnlockDate(target);
+
+
+        // -----------------------------------------
+        // Tránh gọi API liên tục sau khi hết giờ
+        // -----------------------------------------
+
+        let expired = false;
+
 
         const updateCountdown = () => {
 
             const now =
                 new Date();
 
+
             let difference =
                 target.getTime() -
                 now.getTime();
+
 
             // =================================
             // ĐẾN NGÀY MỞ
@@ -235,21 +422,38 @@ export default function BirthdayPage({ onBack }) {
             if (difference <= 0) {
 
                 setCountdown({
+
                     days: "00",
+
                     hours: "00",
+
                     minutes: "00",
+
                     seconds: "00"
+
                 });
 
-                // Gọi lại API để lấy video
-                loadVideo();
+
+                /*
+                 * Chỉ gọi API một lần.
+                 */
+
+                if (!expired) {
+
+                    expired = true;
+
+                    loadVideo();
+
+                }
+
 
                 return;
 
             }
 
+
             // =================================
-            // TÍNH THỜI GIAN
+            // TÍNH NGÀY
             // =================================
 
             const days =
@@ -258,6 +462,7 @@ export default function BirthdayPage({ onBack }) {
                     (1000 * 60 * 60 * 24)
                 );
 
+
             difference -=
                 days *
                 1000 *
@@ -265,11 +470,17 @@ export default function BirthdayPage({ onBack }) {
                 60 *
                 24;
 
+
+            // =================================
+            // TÍNH GIỜ
+            // =================================
+
             const hours =
                 Math.floor(
                     difference /
                     (1000 * 60 * 60)
                 );
+
 
             difference -=
                 hours *
@@ -277,22 +488,38 @@ export default function BirthdayPage({ onBack }) {
                 60 *
                 60;
 
+
+            // =================================
+            // TÍNH PHÚT
+            // =================================
+
             const minutes =
                 Math.floor(
                     difference /
                     (1000 * 60)
                 );
 
+
             difference -=
                 minutes *
                 1000 *
                 60;
+
+
+            // =================================
+            // TÍNH GIÂY
+            // =================================
 
             const seconds =
                 Math.floor(
                     difference /
                     1000
                 );
+
+
+            // =================================
+            // UPDATE
+            // =================================
 
             setCountdown({
 
@@ -316,13 +543,18 @@ export default function BirthdayPage({ onBack }) {
 
         };
 
+
+        // Chạy ngay lập tức
         updateCountdown();
 
+
+        // Chạy mỗi giây
         const timer =
             setInterval(
                 updateCountdown,
                 1000
             );
+
 
         return () => {
 
@@ -330,7 +562,11 @@ export default function BirthdayPage({ onBack }) {
 
         };
 
-    }, [locked, unlockDate]);
+    }, [
+        locked,
+        unlockDate
+    ]);
+
 
     // =========================================
     // FORMAT NGÀY
@@ -342,6 +578,7 @@ export default function BirthdayPage({ onBack }) {
             unlockDate ||
             getNextBirthday();
 
+
         return date.toLocaleDateString(
             "vi-VN",
             {
@@ -352,6 +589,7 @@ export default function BirthdayPage({ onBack }) {
         );
 
     };
+
 
     // =========================================
     // LOADING
@@ -372,11 +610,15 @@ export default function BirthdayPage({ onBack }) {
                     <div className="birthday-loader">
 
                         <div className="loader-heart">
+
                             ❤️
+
                         </div>
 
                         <p>
+
                             Đang mở món quà...
+
                         </p>
 
                     </div>
@@ -388,6 +630,7 @@ export default function BirthdayPage({ onBack }) {
         );
 
     }
+
 
     // =========================================
     // MAIN
@@ -401,7 +644,9 @@ export default function BirthdayPage({ onBack }) {
 
             <div className="birthday-stars" />
 
+
             <div className="birthday-content">
+
 
                 {/* =================================
                     BACK
@@ -412,8 +657,11 @@ export default function BirthdayPage({ onBack }) {
                     onClick={onBack}
                     type="button"
                 >
+
                     ← Quay lại
+
                 </button>
+
 
                 {/* =================================
                     TITLE
@@ -422,20 +670,31 @@ export default function BirthdayPage({ onBack }) {
                 <div className="birthday-title">
 
                     <span>
+
                         ✦ MỘT MÓN QUÀ NHỎ ✦
+
                     </span>
 
+
                     <h1>
+
                         🎂 Happy Birthday
+
                     </h1>
 
+
                     <p>
+
                         Có một món quà...
+
                         <br />
+
                         anh muốn dành riêng cho em.
+
                     </p>
 
                 </div>
+
 
                 {/* =================================
                     GIFT
@@ -445,6 +704,7 @@ export default function BirthdayPage({ onBack }) {
 
                     <div className="gift-glow" />
 
+
                     <div className="gift-box">
 
                         🎁
@@ -452,6 +712,7 @@ export default function BirthdayPage({ onBack }) {
                     </div>
 
                 </div>
+
 
                 {/* =================================
                     LOCKED
@@ -461,22 +722,38 @@ export default function BirthdayPage({ onBack }) {
 
                     <div className="locked-box">
 
+
                         <div className="lock">
+
                             🔒
+
                         </div>
 
+
                         <h2>
+
                             Chưa đến lúc mở
+
                         </h2>
 
+
                         <p>
+
                             Món quà này sẽ được
+
+                            <br />
+
                             mở vào
+
                         </p>
 
+
                         <strong>
+
                             🎂 {formatUnlockDate()} ❤️
+
                         </strong>
+
 
                         {/* =========================
                             COUNTDOWN
@@ -484,67 +761,106 @@ export default function BirthdayPage({ onBack }) {
 
                         <div className="countdown">
 
+
+                            {/* NGÀY */}
+
                             <div className="time-box">
 
                                 <strong>
+
                                     {countdown.days}
+
                                 </strong>
 
                                 <span>
+
                                     Ngày
+
                                 </span>
 
                             </div>
 
+
                             <div className="countdown-colon">
+
                                 :
+
                             </div>
+
+
+                            {/* GIỜ */}
 
                             <div className="time-box">
 
                                 <strong>
+
                                     {countdown.hours}
+
                                 </strong>
 
                                 <span>
+
                                     Giờ
+
                                 </span>
 
                             </div>
 
+
                             <div className="countdown-colon">
+
                                 :
+
                             </div>
+
+
+                            {/* PHÚT */}
 
                             <div className="time-box">
 
                                 <strong>
+
                                     {countdown.minutes}
+
                                 </strong>
 
                                 <span>
+
                                     Phút
+
                                 </span>
 
                             </div>
 
+
                             <div className="countdown-colon">
+
                                 :
+
                             </div>
+
+
+                            {/* GIÂY */}
 
                             <div className="time-box">
 
                                 <strong>
+
                                     {countdown.seconds}
+
                                 </strong>
 
                                 <span>
+
                                     Giây
+
                                 </span>
 
                             </div>
+
 
                         </div>
+
 
                         <p className="countdown-message">
 
@@ -553,9 +869,11 @@ export default function BirthdayPage({ onBack }) {
 
                         </p>
 
+
                     </div>
 
                 )}
+
 
                 {/* =================================
                     VIDEO
@@ -565,32 +883,47 @@ export default function BirthdayPage({ onBack }) {
 
                     <div className="video-card">
 
+
                         <div className="video-header">
 
                             <span>
+
                                 ✦ Món quà dành cho em ✦
+
                             </span>
 
+
                             <h2>
+
                                 {video.title}
+
                             </h2>
 
                         </div>
 
+
                         <div className="video-wrapper">
 
                             <video
+
                                 controls
+
                                 playsInline
+
                                 preload="metadata"
+
                                 controlsList="nodownload"
+
                             >
 
                                 <source
+
                                     src={
                                         video.videoUrl
                                     }
+
                                     type="video/mp4"
+
                                 />
 
                                 Trình duyệt không hỗ trợ
@@ -599,6 +932,7 @@ export default function BirthdayPage({ onBack }) {
                             </video>
 
                         </div>
+
 
                         {video.description && (
 
@@ -610,25 +944,36 @@ export default function BirthdayPage({ onBack }) {
 
                         )}
 
+
                         <div className="video-footer">
 
                             <span>
+
                                 ❤️
+
                             </span>
 
+
                             <span>
+
                                 Một món quà nhỏ từ anh
+
                             </span>
 
+
                             <span>
+
                                 ❤️
+
                             </span>
 
                         </div>
 
+
                     </div>
 
                 )}
+
 
                 {/* =================================
                     KHÔNG CÓ VIDEO
@@ -638,26 +983,38 @@ export default function BirthdayPage({ onBack }) {
 
                     <div className="locked-box">
 
+
                         <div className="lock">
+
                             🎁
+
                         </div>
 
+
                         <h2>
+
                             Món quà đang được chuẩn bị
+
                         </h2>
 
+
                         <p>
+
                             Anh đang chuẩn bị một
                             điều đặc biệt dành cho em ❤️
+
                         </p>
+
 
                     </div>
 
                 )}
+
 
             </div>
 
         </div>
 
     );
+
 }
