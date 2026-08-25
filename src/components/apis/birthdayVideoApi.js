@@ -3,7 +3,8 @@ import axios from "axios";
 const API =
     // "http://localhost:3000/api/birthday-video";
 
-"https://be-kn.onrender.com/api/birthday-video";
+"https://be-kn-1.onrender.com//api/birthday-video";
+
 // =========================
 // LẤY DANH SÁCH
 // =========================
