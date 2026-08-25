@@ -1,7 +1,7 @@
 const API_URL =
     import.meta.env.VITE_API_URL ||
     // "http://localhost:3000/api";
-"https://be-kn-1.onrender.com//api";
+"https://be-kn-1.onrender.com/api";
 export const createDiary = async (data) => {
     const response = await fetch(
         `${API_URL}/diaries`,
